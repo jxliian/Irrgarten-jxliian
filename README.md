@@ -1,8 +1,8 @@
 # Irrgarten
 
 ### Autor:
-- **Usuario GitHub**: jxliann
-- **Nombre**: [Tu nombre completo]
+- **Usuario GitHub**: jxliian 
+- **Nombre**: Julian Carrion Tovar
 - **Universidad**: Universidad de Granada
 - **Grado**: Doble Grado en Ingeniería Informática y Administración y Dirección de Empresas
 - **Curso Académico**: 2024-2025
@@ -12,7 +12,7 @@
 ## Descripción del Proyecto
 **Irrgarten** es un juego de laberinto diseñado y programado como parte de las prácticas de la asignatura **Programación y Diseño Orientado a Objetos (PDOO)**, de la Universidad de Granada. El proyecto ha sido desarrollado en los lenguajes **Ruby** y **Java**, y cuenta con toda la documentación necesaria en este repositorio.
 
-El juego desafía a los jugadores a resolver laberintos generados de manera dinámica, probando sus habilidades de lógica y resolución de problemas.
+El juego desafía a los jugadores a resolver laberintos probando sus habilidades de lógica y resolución de problemas.
 
 ---
 
@@ -32,10 +32,8 @@ El juego desafía a los jugadores a resolver laberintos generados de manera din�
 - **Plataforma**: Multiplataforma
 - **Género del Juego**: Puzzle/Laberinto
 - **Nivel de Dificultad**: Ajustable por el usuario
-- **Modo de Juego**: Individual
+- **Modo de Juego**: Individual/Multijugador
 - **Funcionalidades**:
-  - Generación dinámica de laberintos.
-  - Solución automática y manual de los laberintos.
   - Gráficos sencillos pero intuitivos.
   - Sistema de puntuación basado en tiempo y movimientos.
 
@@ -45,7 +43,7 @@ El juego desafía a los jugadores a resolver laberintos generados de manera din�
 
 Para ejecutar **Irrgarten** necesitarás:
 
-- **Ruby**: Versión X.X o superior
+- **Ruby**: Última version instalada
 - **Java**: JDK 11 o superior
 - **Sistema Operativo**: Windows, macOS o Linux
 
@@ -80,7 +78,7 @@ Para ejecutar **Irrgarten** necesitarás:
 
 ## Documentación
 
-Toda la documentación del proyecto, incluyendo diagramas UML y detalles técnicos, se encuentra en el directorio `docs` del repositorio.
+Toda la documentación del proyecto, incluyendo pdfs, se encuentra en el directorio `docs` del repositorio.
 
 ---
 
@@ -98,10 +96,10 @@ Este proyecto fue desarrollado con fines educativos, pero se agradecen sugerenci
 
 ## Licencia
 
-Este proyecto no tiene una licencia específica ya que fue desarrollado como parte de un trabajo académico. Sin embargo, está abierto para ser utilizado y modificado con fines educativos.
+Este proyecto no tiene una licencia específica ya que fue desarrollado como parte de un trabajo académico. Sin embargo, está abierto para ser utilizado y modificado con fines educativos, siempre que se den créditos al autor original.
 
 ---
 
 ## Contacto
 
-Si tienes alguna duda o sugerencia, puedes contactarme a través de GitHub: [jxliann](https://github.com/jxliann).
+Si tienes alguna duda o sugerencia, puedes contactarme a través de GitHub: [jxliian](https://github.com/jxliian).
