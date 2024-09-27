@@ -5,6 +5,8 @@
 require_relative 'directions'
 require_relative 'orientation'
 require_relative 'game_character'
+require_relative 'shield'
+require_relative 'weapon'
 
 
 
