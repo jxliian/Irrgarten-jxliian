@@ -11,8 +11,8 @@ package Irrgarten;
 public class Weapon {
     
 // Private attributes
-    private final float power;
-    private float uses;
+    private float power;
+    private int uses;
     
     
   
@@ -23,7 +23,7 @@ public class Weapon {
      * @param uses Usos
      * 
      */
-    public Weapon(float power, float uses){
+    public Weapon(float power, int uses){
         this.power = power;
         this.uses=uses;
         
@@ -43,8 +43,8 @@ public class Weapon {
         }
         
     }
-    
-    @Override // Por que estamos modificando una funcion ya existente en su funcion padre.
+    // Por que estamos modificando una funcion ya existente en su funcion padre.
+    @Override 
     public String toString(){
         return "W[" + power + " , " + uses + "]";
         // Y con esto ya lo pasa solo a string
