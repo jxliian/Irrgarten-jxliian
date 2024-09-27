@@ -10,8 +10,8 @@ class weapon
   #constructor
 
   def initialize(power, uses)
-    @power = power
-    @uses = uses
+    @power = power.to_f
+    @uses = uses.to_i
   end
 
   def attack

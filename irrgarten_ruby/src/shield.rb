@@ -10,8 +10,8 @@ class shield
   #constructor
 
   def initialize(protection, uses)
-    @protection = protection
-    @uses = uses
+    @protection = protection.to_f
+    @uses = uses.to_i
   end
 
   def protect
