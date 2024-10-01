@@ -51,6 +51,10 @@ public class Weapon {
         
     }
     
+    public boolean discard(Dice dados){
+        return dados.discardElement(uses);
+    }
+    
     
     
 }

@@ -21,7 +21,7 @@ public class Shield {
     }
     
     public float protect(){
-        if (uses<0){
+        if (uses>0){
             uses--;
             return protection;
         } else {
@@ -36,8 +36,9 @@ public class Shield {
         
     }
     
-    
-    
+    public boolean discard(Dice dados){
+        return dados.discardElement(uses);
+    }
     
     
 }
