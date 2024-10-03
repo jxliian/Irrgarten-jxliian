@@ -15,7 +15,7 @@ public class Shield {
     private int uses;
     
     public Shield(float protection, int uses){
-        this.protection=protection;
+        this.protection=protection; // da igual que lo llame igual, se diferencia con el this. en java
         this.uses=uses;
         
     }

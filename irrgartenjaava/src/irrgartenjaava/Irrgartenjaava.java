@@ -34,23 +34,23 @@ public class Irrgartenjaava {
         System.out.println(espada.toString());
         
         //--------------------------------------------------------------------------------------------- parte 2 main
-        // Crear instancias de Weapon
+        // Crear instancias de Weapon y probarlas :)
         Weapon espada1 = new Weapon(1, 1); // Potencia 5, 1 uso
         Weapon espada2 = new Weapon(1, 2); // Potencia 3, 2 usos
 
-        // Crear instancias de Shield
+        // Crear instancias de Shield """
         Shield escudo1 = new Shield(4, 3); // Protección 4, 3 usos
         Shield escudo2 = new Shield(2, 1); // Protección 2, 1 uso
 
-        // Probar los métodos de Weapon
+        // Probar los métodos de Weapon y sacarlas por consola :))
         System.out.println("Ataque con espada 1: " + espada1.attack());
         System.out.println("Ataque con espada 2: " + espada2.attack());
 
-        // Probar los métodos de Shield
+        // Probar los métodos de Shield """
         System.out.println("Protección con escudo 1: " + escudo1.protect());
         System.out.println("Protección con escudo 2: " + escudo2.protect());
 
-        // Probar la clase Dice
+        // Probar la clase Dice haciendo lo de los 100 intentos xdd
         int totalDescartes = 0;
         for (int i = 0; i < 100; i++) {
             int usesLeft = dados.usesLeft();
