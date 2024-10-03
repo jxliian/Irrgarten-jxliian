@@ -9,5 +9,16 @@ require_relative 'game_character'
 require_relative 'shield'
 require_relative 'weapon'
 
+  class Main
 
+    weapon = Weapon.new(3, 5)
+    shield = Shield.new(5, 5)
+
+    weapon.attack
+    shield.protect
+
+    puts "Weapon: #{weapon}"
+    puts "Shield: #{shield}"
+
+  end
 end

@@ -15,7 +15,7 @@ module Irrgarten
     end
 
     def protect
-      if uses >0
+      if @uses >0
         @uses-=1
       return @protection
       else 
