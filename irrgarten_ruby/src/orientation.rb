@@ -1,7 +1,10 @@
 #encoding:utf-8
 
-module orientation
-  VERTICAL= : vertical
-  HORIZONTAL= : horizontal
+module Irrgarten
+
+  module Orientation
+    VERTICAL= :vertical
+    HORIZONTAL= :horizontal
+  end
 end
 

@@ -1,5 +1,6 @@
 #encoding:utf-8
 
+module Irrgarten
 
 ## This is the main file that requires all the other files in the project
 require_relative 'directions'
@@ -9,5 +10,4 @@ require_relative 'shield'
 require_relative 'weapon'
 
 
-
-
+end
