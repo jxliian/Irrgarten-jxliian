@@ -8,17 +8,26 @@ require_relative 'orientation'
 require_relative 'game_character'
 require_relative 'shield'
 require_relative 'weapon'
+require_relative 'dice'
+require_relative 'game_state'
 
-  class Main
+  class TestP1
+      weapon = Weapon.new(3, 5)
+      shield = Shield.new(5, 5)
+      dados = Dice.new
 
-    weapon = Weapon.new(3, 5)
-    shield = Shield.new(5, 5)
+      ## Probar el metodo de discard para el arma y el escudo
+      weapon.discard
+      shield.discard
 
-    weapon.attack
-    shield.protect
+      weapon.attack
+      shield.protect
 
-    puts "Weapon: #{weapon}"
-    puts "Shield: #{shield}"
-
+      puts "Weapon: #{weapon}"
+      puts "Shield: #{shield}"
+  
   end
+
+
 end
+

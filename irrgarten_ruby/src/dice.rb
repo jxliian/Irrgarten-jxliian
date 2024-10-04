@@ -38,10 +38,46 @@ module Irrgarten
     end
 
     def self.weapons_reward()
-      @@generator.rand(@@WEAPONS_REWARD.to_i) ## revisar esto, por aqui me quedo
+      @@generator.rand(@@WEAPONS_REWARD.to_i+1) ## revisar esto, por aqui me quedo
+    end                                       ## no se si hay que ponerle +1
+                                              ## a este, a los anteriores o los siguiente
+    def self.shields_reward()
+      @@generator.rand(@@SHIELDS_REWARD.to_i+1)
     end
 
+    def self.health_reward()
+      @@generator.rand(@@HEALTH_REWARD.to_i+1)
+    end
 
+    def self.weapon_power()
+      @@generator.rand(@@MAX_ATTACK.to_f)
+    end
 
-  end
-end
+    def self.shield_power()
+      @@generator.rand(@@MAX_SHIELD.to_f)
+    end
+
+    def self.uses_left()
+      @@generator.rand(@@MAX_USES.to_i+1)
+    end      
+
+    def self.intensity(competence)
+      @@generator.rand(competence.to_f)
+    end
+
+    def self.discard_element(uses_left)
+      probabilidad_inversa= (1-(uses_left.to_i/@@MAX_USES.to_i))
+      
+      if uses_left.to_i >= @@MAX_USES.to_i
+        return false
+      end
+
+      if uses_left.to_i <= 0
+        return true
+      end
+      @@generator.rand() < probabilidad_inversa
+    end
+  
+  end #end class
+
+end #end module

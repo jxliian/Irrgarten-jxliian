@@ -27,5 +27,12 @@ module Irrgarten
     def to_s
       return "W: #{@power} , #{@uses}"
     end
+
+    def discard()
+      dados = Dice.new
+      dados.discard_element(@uses)
+    end
+
+
   end
 end

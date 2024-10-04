@@ -27,5 +27,11 @@ module Irrgarten
       return "S: #{@protection} , #{@uses}"
 
     end
-  end
-end
+
+    def discard()
+      dados = Dice.new
+      dados.discard_element(@uses)
+    end
+
+  end #end class
+end #end module
