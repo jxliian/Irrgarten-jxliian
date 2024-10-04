@@ -33,7 +33,7 @@ public class Irrgartenjaava {
         System.out.println(escudo.toString());
         System.out.println(espada.toString());
         
-        //--------------------------------------------------------------------------------------------- parte 2 main
+//--------------------------------------------------------------------------------------------- parte 2 main
         // Crear instancias de Weapon y probarlas :)
         Weapon espada1 = new Weapon(1, 1); // Potencia 5, 1 uso
         Weapon espada2 = new Weapon(1, 2); // Potencia 3, 2 usos
@@ -62,9 +62,27 @@ public class Irrgartenjaava {
         }
 
         System.out.println("Total de descartes en 100 intentos: " + totalDescartes);
-    }
-        
+    
+//----------------------------------------------------------------------------------- parte 3 enumerados
 
-        
-    }
+    // Probar los diferentes archivos de enumerados que hemos creado
+
+    Directions direccion = Directions.UP;
+    System.out.println("Dirección: " + direccion);
+
+    Orientation orientacion = Orientation.VERTICAL;
+    System.out.println("Orientación: " + orientacion);
+
+    GameCharacter jugador = GameCharacter.PLAYER;
+    System.out.println("Personaje: " + jugador);
+
+//----------------------------------------------------------------------------------- parte 4 GameState
+
+    // Crear una instancia de GameState y probarla
+
+    GameState estado = new GameState("Laberinto", "Jugadores", "Monstruos", 0, false, "Log");
+    System.out.println("game estate" + estado);
+   
+    }        
+}
    
