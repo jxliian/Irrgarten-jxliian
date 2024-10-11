@@ -1,5 +1,8 @@
 #encoding:utf-8
 
+require_relative 'dice'
+
+
 module Irrgarten
 
   class Weapon

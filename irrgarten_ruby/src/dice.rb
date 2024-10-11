@@ -57,7 +57,7 @@ module Irrgarten
       @@generator.rand(@@MAX_SHIELD.to_f)
     end
 
-    def self.uses_left()
+    def uses_left()
       @@generator.rand(@@MAX_USES.to_i+1)
     end      
 
@@ -65,8 +65,8 @@ module Irrgarten
       @@generator.rand(competence.to_f)
     end
 
-    def self.discard_element(uses_left)
-      probabilidad_inversa= (1-(uses_left.to_i/@@MAX_USES.to_i))
+    def discard_element(uses_left)
+      probabilidad_inversa= (1-(uses_left.to_f/@@MAX_USES.to_f))
       
       if uses_left.to_i >= @@MAX_USES.to_i
         return false
@@ -75,7 +75,8 @@ module Irrgarten
       if uses_left.to_i <= 0
         return true
       end
-      @@generator.rand() < probabilidad_inversa
+      
+      return @@generator.rand() < probabilidad_inversa
     end
   
   end #end class

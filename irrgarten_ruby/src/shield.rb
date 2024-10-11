@@ -2,6 +2,8 @@
 
 module Irrgarten
 
+  require_relative 'dice'
+
   class Shield
 
     @protection #atributo de instancia de clase
