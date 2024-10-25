@@ -77,7 +77,7 @@ public class Dice {
     }
     
     public static float intensity(float competence){
-        return generator.nextFloat(competence);
+        return generator.nextFloat()*competence;
         
     }
     
@@ -90,6 +90,7 @@ public class Dice {
     probable que sean descartados.
     
     */
+    
     public static boolean discardElement(int usesLeft){
         float probabilidad_inversa=(1-((float)usesLeft/MAX_USES));
         

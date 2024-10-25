@@ -20,32 +20,45 @@ public class Monster {
     
     
     Monster(String name, float intelligence, float strength){
-        throw new UnsupportedOperationException();    
+        this.intelligence=intelligence;
+        this.name=name;
+        this.strength=strength;
+        
+        // me falta lo de definir si no esta en ninguna casilla
+        // del laberinto?? x=y=-1?
+
     }
     
     public boolean dead(){
-        throw new UnsupportedOperationException();    
+        return health==0;
+    }
+    
+    //auxiliar getter for private variable
+    public float getStrength(){
+        return strength;
     }
     
     public float attack(){
-        throw new UnsupportedOperationException();
+        return Dice.intensity(this.getStrength());
     }
     
     public boolean defend(float receivedAttack){
         throw new UnsupportedOperationException();
-    }
+    } // P3 lo hare cuando llegue a P3
     
     public void setPos(int row, int col){
-        throw new UnsupportedOperationException();
+        this.row=row;
+        this.col=col;
     }
     
     @Override
     public String toString(){
-        throw new UnsupportedOperationException();
+        return "M[" + name + " , "  + intelligence + " , " + strength + " , " + health + "]";
+        // no se que falta, a lo mejor falta row o col
     }
     
     private void gotWounded(){
-        throw new UnsupportedOperationException();
-    }
+        this.health=this.health-1;
+    }   // mal escrito?
     
 }

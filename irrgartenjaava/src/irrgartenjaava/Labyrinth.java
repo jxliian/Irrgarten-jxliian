@@ -25,6 +25,7 @@ public class Labyrinth {
         throw new UnsupportedOperationException();
     }
     
+    // me quedao por aqui
     public void spreadPlayers(ArrayList<Player> players){
         throw new UnsupportedOperationException();
     }
