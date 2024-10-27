@@ -131,7 +131,7 @@ public class Player {
     }
     
     private float defensiveEnergy(){
-        return this.intelligence + this.sumShields();     
+        return (this.intelligence + this.sumShields());     
     }
    
     private boolean manageHit(float receivedAttack){
@@ -148,7 +148,7 @@ public class Player {
     }
     
     private void incConsecutiveHits(){
-        this.consecutiveHits+=1;
+        this.consecutiveHits++;
     }
     
 }
