@@ -38,6 +38,7 @@ public class Player {
         this.intelligence=intelligence;
         this.strength=strength;
         this.health=INITIAL_HEALTH;
+        this.consecutiveHits=0;
         // yo creo que asi esta bien
         // inicializar los array en blanco
         this.weapons= new ArrayList<>();
@@ -73,7 +74,7 @@ public class Player {
     }
     
     public boolean dead(){
-        return health==0;       //true si health=0 si muerto
+        return health<=0;       //true si health=0 si muerto
     }
     
     public Directions move(Directions direction, ArrayList<Directions>validMoves){

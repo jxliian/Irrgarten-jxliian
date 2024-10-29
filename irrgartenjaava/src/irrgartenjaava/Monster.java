@@ -23,6 +23,7 @@ public class Monster {
         this.intelligence=intelligence;
         this.name=name;
         this.strength=strength;
+        this.health=INITIAL_HEALTH; // esta no se si es necesaria
         
         // me falta lo de definir si no esta en ninguna casilla
         // del laberinto?? x=y=-1?
@@ -30,7 +31,7 @@ public class Monster {
     }
     
     public boolean dead(){
-        return health==0;
+        return health<=0;
     }
     
     //auxiliar getter for private variable
