@@ -23,6 +23,9 @@ public class Dice {
     private static final int MAX_ATTACK = 3; //(máxima potencia de las armas)
     private static final int MAX_SHIELD = 2; // (máxima potencia de los escudos)
     private static final Random generator = new Random(); 
+   
+    // modelo ajustado a jdk 11
+    
     
     public static int randomPos(int max){
         return generator.nextInt(max);
@@ -44,35 +47,35 @@ public class Dice {
     }
     
     public static boolean resurrectPlayer(){
-        return generator.nextFloat()< RESURRECT_PROB;
+        return generator.nextFloat()<= RESURRECT_PROB;
   
     }
     
     public static int weaponsReward(){
-        return generator.nextInt(0, WEAPONS_REWARD);
+        return generator.nextInt(WEAPONS_REWARD+1);
     }
     
     public static int shieldsReward(){
-        return generator.nextInt(0, SHIELDS_REWARD);    
+        return generator.nextInt(SHIELDS_REWARD+1);    
     }
     
     public static int healthReward(){
-        return generator.nextInt(0, HEALTH_REWARD);
+        return generator.nextInt(HEALTH_REWARD+1);
         
     }
     
     public static float weaponPower(){
-        return generator.nextInt(0,MAX_ATTACK);
+        return generator.nextFloat()*MAX_ATTACK;
   
     }
     
     public static float shieldPower(){
-        return generator.nextInt(0,MAX_SHIELD);
+        return generator.nextFloat()*MAX_SHIELD;
         
     }
     
     public static int usesLeft(){
-        return generator.nextInt(0, MAX_USES);
+        return generator.nextInt(MAX_USES+1);
         
     }
     

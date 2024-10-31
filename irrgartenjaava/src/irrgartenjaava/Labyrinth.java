@@ -103,7 +103,38 @@ public class Labyrinth {
             toReturn+="\n";
         }
         return toReturn;    
-        //-> ??? le tiene que preguntar ismael
+        //-> ???
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        le tiene que preguntar ismael
         
     */
     
