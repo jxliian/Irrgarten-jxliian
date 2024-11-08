@@ -78,9 +78,24 @@ public class Player {
         return health<=0;       //true si health=0 si muerto
     }
     
+    //creo que esta bien
     public Directions move(Directions direction, ArrayList<Directions>validMoves){
-        throw new UnsupportedOperationException(); // se hace asi???
-    } //continuara P3                             // directions [] me refiero
+      
+      int size=validMoves.size();
+      boolean contained=validMoves.contains(direction);
+      
+      Directions aux;
+      
+      if ((size > 0) && !contained){
+          
+          aux=validMoves.get(0);
+      } else {
+          aux=direction;
+      }
+      
+      return aux;
+        
+    } // directions [] me refiero
     
     public float attack(){
         return (this.strength+this.sumWeapons());
@@ -90,8 +105,25 @@ public class Player {
         return this.manageHit(receivedAttack);
     }
     
-    public void receiveReward(){ // P3
-        throw new UnsupportedOperationException();
+    public void receiveReward(){ 
+
+        int wReward= Dice.weaponsReward();
+        int sReward= Dice.shieldsReward();
+        Weapon wnew;
+        
+        for (int i=0; i<wReward ; i++){
+            this.receiveWeapon(this.newWeapon());    
+        }
+        
+        for (int j=0; j<sReward; j++){
+            this.receiveShield(this.newShield());
+        }
+        
+        int extraHealth;
+        
+        extraHealth=Dice.healthReward();
+        this.health+=extraHealth;
+        
     }
     
     @Override
@@ -103,8 +135,24 @@ public class Player {
         throw new UnsupportedOperationException();
     }
     
-    private void receiveShield(Shield s){ // P3
-        throw new UnsupportedOperationException();
+    private void receiveShield(Shield s){
+
+        Shield si;
+        Dice dados= new Dice();
+        for(int i=0; i<shields.size(); i++){
+            si=shields.get(i);
+            boolean discard= si.discard(dados);
+            
+            if(discard){
+                shields.remove(si);
+            }
+            
+            int size=shields.size();
+            
+            if (size < MAX_SHIELDS){
+                shields.add(s);
+            }
+        }
     }
     
     private Weapon newWeapon(){   
@@ -137,8 +185,25 @@ public class Player {
     }
    
     private boolean manageHit(float receivedAttack){
-        throw new UnsupportedOperationException();        
-            // P3
+        
+        float defense=this.defensiveEnergy();
+        
+        if (defense < receivedAttack){
+            this.gotWounded();
+            this.incConsecutiveHits();
+            
+        } else {
+            this.resetHits();
+        }
+        
+        boolean lose=((this.consecutiveHits == HITS2LOSE) || (this.dead()));
+        
+        // lose, si no return
+        if (lose){
+            this.resetHits();
+        }
+        
+        return lose;
     }
     
     private void resetHits(){
