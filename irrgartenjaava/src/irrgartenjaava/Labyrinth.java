@@ -71,8 +71,16 @@ public class Labyrinth {
     
     @Override
     public String toString(){
-        return "L[ rows:" + nRows + " , cols: " + nCols + " , exitrow:" + exitRow + " , exitcol:" + exitCol +"]";
-    
+        
+        StringBuilder laberinto = new StringBuilder();
+        for (int i = 0; i < nRows; i++) {
+            for (int j = 0; j < nCols; j++) {
+            laberinto.append("[").append(labyrinth[i][j]).append("]");
+            }
+            laberinto.append("\n");
+        }
+        return laberinto.toString();
+     
     } // este no se si esta bien la verdad
     
     public void addMonster(int row, int col, Monster monster){

@@ -8,6 +8,10 @@ require_relative 'shield'
 require_relative 'weapon'
 require_relative 'dice'
 require_relative 'game_state'
+require_relative 'player'
+require_relative 'monster'
+require_relative 'labyrinth'
+require_relative 'game'
 
 
 module Irrgarten
@@ -81,6 +85,48 @@ module Irrgarten
       ##def initialize(lab, player, monster, ctPlayer, winner_, log_)
       estado= Game_state.new("Laberinto", "Jugadores", "Monstruos", 0, false, "Log")
       puts "Estado, no tengo to_s pero deberia ser algo asi xp: #{estado}"
+
+
+## ------------------------------------- Probar los metodos de Player ---------------------------------------------------------------##
+
+    jugador1= Player.new("Jugador1", 3, 4)
+    jugador2= Player.new("Jugador2", 2, 5)
+
+    puts "Jugador1 creado: #{jugador1.to_s}"
+    puts "Jugador2 creado: #{jugador2.to_s}"
+
+    jugador1.set_pos(1,1)
+    puts "Jugador1 despues de set_pos(1,1): #{jugador1.to_s}"
+    jugador2.attack
+    puts "Jugador2 col y row: #{jugador2.get_pos}"
+    jugador2.resurrect
+    puts "Jugador2 despues de resurrect: #{jugador2.to_s}"
+    puts "Jugador2 esta muerto? #{jugador2.dead}"
+
+## ------------------------------------- Probar los metodos de Monster ---------------------------------------------------------------##
+
+    monstruo1= Monster.new("Monstruo1", 3, 4)
+    monstruo2= Monster.new("Monstruo2", 2, 5)
+    puts "Monstruo1 creado: #{monstruo1.to_s}"
+    puts "Monstruo2 creado: #{monstruo2.to_s}"
+    puts "Monstruo fuerza: #{monstruo2.get_strength}"
+    monstruo1.set_pos(4,3)
+    puts "Monstruo1 despues de set_pos(4,3): #{monstruo1.to_s}"
+
+## ------------------------------------- Probar los metodos de Labyrinth ---------------------------------------------------------------##
+
+    laberinto= Labyrinth.new(10, 10, 3, 3)
+    puts "Laberinto creado: \n#{laberinto.to_s }"
+    puts "Laberinto haveawinner? #{laberinto.have_a_winner}"
+    laberinto.add_monster(2,2,monstruo1)
+    puts "monstruo1 puesto en 3,3 laberinto: #{monstruo1.to_s}"
+    puts "laberinto despues de colocar monstruo: \n#{laberinto.to_s}"
+
+## ------------------------------------- Probar los metodos de Game ---------------------------------------------------------------##
+
+## aun no puedo porque me faltan funciones elementales dela P3
+
+
 
   end ## end class
 end #end module

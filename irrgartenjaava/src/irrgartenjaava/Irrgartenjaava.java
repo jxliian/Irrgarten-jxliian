@@ -125,10 +125,12 @@ public class Irrgartenjaava {
 
     // row , col , exitrow, exitcol
     Labyrinth laberinto= new Labyrinth(10,10, 9, 9);
-    System.out.println("Laberinto creado:" + laberinto.toString());
+    System.out.println("Laberinto creado:" + '\n' + laberinto.toString());
     System.out.println("Laberinto haveawinner?:" + laberinto.haveAWinner());
     laberinto.addMonster(3,3, monster2);
     System.out.println("Monstruo puesto en laberinto 3,3:" + monster2.toString());
+    System.out.println("Laberinto despues del monstruo:" + '\n' + laberinto.toString());
+
     // resto de cosas de monster son private
     
 //---------- prueba de game - no puedo hacer aun me faltan funciones

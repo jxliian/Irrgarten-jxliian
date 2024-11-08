@@ -24,6 +24,8 @@ module Irrgarten
       @intelligence=intelligence
       @strength=strength
       @health=@@INITIAL_HEALTH
+      @col=0
+      @row=0
       # supongo que asi esta bien hecho el health
 
       #creamos los array de weapons y shields
@@ -68,6 +70,10 @@ module Irrgarten
       @row=row
       @col=col
 
+    end
+
+    def get_pos()
+      return @row, @col
     end
 
     def dead()

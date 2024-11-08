@@ -26,7 +26,7 @@ module Irrgarten
     # Posicion invalida
     @@INVALID_POS= -1
 
-    def initializate(nrows, ncols, exit_row, exit_col)
+    def initialize(nrows, ncols, exit_row, exit_col)
       @nrows=nrows.to_i
       @ncols=ncols.to_i
       @exit_row=exit_row.to_i
@@ -58,8 +58,10 @@ module Irrgarten
 
     # esta no se si esta bien, lo hacen con 
     # un bucle for, pero no se si es necesario
-    def to_s()
-      return "L [#{@nrows} #{@ncols} #{@exit_row} #{@exit_col}]"
+    def to_s
+      @labyrinth.map do |row|
+        row.map { |cell| "[#{cell}]" }.join
+      end.join("\n") + "\n"
     end
 
     def add_monster(row, col, monster)

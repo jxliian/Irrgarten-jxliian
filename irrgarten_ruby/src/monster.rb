@@ -16,6 +16,8 @@ module Irrgarten
       @intelligence = intelligence
       @strength = strength
       @health = @@INITIAL_HEALTH
+      @row = 0
+      @col = 0
     end
 
     def dead()
@@ -39,7 +41,7 @@ module Irrgarten
     end
 
     def to_s()
-      return "M [#{@name} #{@intelligence} #{@strength} #{@health} ]"
+      return "M [#{@name} #{@intelligence} #{@strength} #{@health} #{@row} #{@col}]"
     end
 
     def got_wounded()
