@@ -23,7 +23,11 @@ public class Monster {
         this.intelligence=intelligence;
         this.name=name;
         this.strength=strength;
-        this.health=INITIAL_HEALTH; // esta no se si es necesaria
+        this.health=INITIAL_HEALTH;
+        this.row=0;
+        this.col=0;
+
+        // esta no se si es necesaria
         
         // me falta lo de definir si no esta en ninguna casilla
         // del laberinto?? x=y=-1?
@@ -54,8 +58,7 @@ public class Monster {
     
     @Override
     public String toString(){
-        return "M[" + name + " , "  + intelligence + " , " + strength + " , " + health + "]";
-        // no se que falta, a lo mejor falta row o col
+       return "M[ nombre:" + name + " , inteligencia:" + intelligence + " , fuerza: " + strength + " , salud: " + health + " , row: " + row + " , col: " + col + " ]";
     }
     
     private void gotWounded(){

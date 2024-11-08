@@ -23,7 +23,7 @@ public class Game {
     
     private static final int NUM_MONSTERS=3;
     // al azar vaya
-    private static final int [][] INIT_MONSTERS = {{0,0}, {1,1}, {2,2}, {3,3}, {1,3}};
+    private static final int [][] INIT_MONSTERS = {{3,2}, {1,1}, {2,2}, {3,3}, {1,3}};
 
     //NUM de obstaculos
     private static final int NUM_BLOCKS=4;

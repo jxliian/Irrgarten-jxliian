@@ -71,72 +71,7 @@ public class Labyrinth {
     
     @Override
     public String toString(){
-        return "L[" + nRows + " , " + nCols + " , " + exitRow + " , " + exitCol +"]";
-    /*
-        
-    
-        // Cálculo del número de caracteres que debe ocupar cada parte
-        int filSize = Integer.toString(this.nRows-1).length();
-        int colSize = Integer.toString(this.nCols-1).length();
-        int nPlayersSize = Integer.toString(this.players.length-1).length();
-        
-        // Cálculo del tamaño máximo
-        int maxSize = Math.max(Math.max(filSize, colSize), nPlayersSize);
-        final String FORMAT = "%"+maxSize+"s";
-
-        // Cadena a devolver
-        String toReturn="";
-
-        // Índices en cada columna
-        toReturn+=" " + String.format(FORMAT, " ");
-        for (int i=0; i<this.nCols; i++){
-            toReturn+=String.format(FORMAT, i)+" ";
-        }
-        toReturn+="\n";
-
-
-        for(int r=0; r<this.nRows; r++){
-            toReturn+=String.format(FORMAT, r)+" "; // Índices en cada fila
-            for(int c=0; c<this.nCols; c++){
-                toReturn+=String.format(FORMAT, this.labyrinth[r][c])+" ";
-            }
-            toReturn+="\n";
-        }
-        return toReturn;    
-        //-> ???
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        le tiene que preguntar ismael
-        
-    */
+        return "L[ rows:" + nRows + " , cols: " + nCols + " , exitrow:" + exitRow + " , exitcol:" + exitCol +"]";
     
     } // este no se si esta bien la verdad
     
@@ -157,10 +92,11 @@ public class Labyrinth {
         throw new UnsupportedOperationException();
     }
     
-    //P3
+    //p3
     public void addBlock(Orientation orientation, int startRow, int startCol, int length){
         throw new UnsupportedOperationException();
     }
+   
     
     //p3
     public ArrayList<Directions> validMoves(int row, int col){

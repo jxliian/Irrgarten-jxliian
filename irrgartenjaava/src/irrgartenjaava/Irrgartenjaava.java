@@ -4,17 +4,23 @@
  */
 package irrgartenjaava;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author jxlig0d
  */
 public class Irrgartenjaava {
 
+    
+    
     /**
      * @param args the comman line arguments
      */
     public static void main(String[] args) {
-        Weapon espada = new Weapon(0,0);
+     
+   
+   Weapon espada = new Weapon(0,0);
         Shield escudo = new Shield(2,3);
         Dice dados = new Dice();
         
@@ -82,7 +88,59 @@ public class Irrgartenjaava {
 
     GameState estado = new GameState("Laberinto", "Jugadores", "Monstruos", 0, false, "Log");
     System.out.println("game estate" + estado);
-   
+    
+    
+//----------------------------------------------------------------------------------- pruebas para examen
+//---------- prueba de player
+
+    Player jugador1= new Player('1', 2, 4);
+    Player jugador2= new Player('2', 3, 5);
+    //numero, intelligence y fuerza
+    System.out.println("Jugador creado:" + jugador1.toString());
+    System.out.println("Jugador creado:" + jugador2.toString());
+    
+    jugador1.setPos(1, 1);
+    System.out.println("Jugador1 setposeado a 1,1: " + jugador1.toString());
+    // jugador2 ataca
+    jugador2.attack();
+    System.out.println(
+        "col : " +jugador2.getCol() + "row : " +jugador2.getRow() + "number : " +jugador2.getNumber());
+    System.out.println("Jugador2 ataca: " + jugador2.toString());
+    jugador2.resurrect();
+    System.out.println("Jugador2 resurrect: " + jugador2.toString());
+    System.out.println("Jugador2 esta muerto?: " + jugador2.dead());
+
+//---------- prueba de monster
+
+    //name, intelligence y strength
+    Monster monster1= new Monster("2", 2f, 3f);
+    Monster monster2= new Monster("3", 2f, 3f);
+    System.out.println("Monstruo creado:" + monster1.toString());
+    System.out.println("fuerza: " + monster1.getStrength());
+    monster1.setPos(1,2);
+    System.out.println("Monster1 setposeado a 1,2: " + monster1.toString());
+    
+    
+//---------- prueba de labyrinth
+
+    // row , col , exitrow, exitcol
+    Labyrinth laberinto= new Labyrinth(10,10, 9, 9);
+    System.out.println("Laberinto creado:" + laberinto.toString());
+    System.out.println("Laberinto haveawinner?:" + laberinto.haveAWinner());
+    laberinto.addMonster(3,3, monster2);
+    System.out.println("Monstruo puesto en laberinto 3,3:" + monster2.toString());
+    // resto de cosas de monster son private
+    
+//---------- prueba de game - no puedo hacer aun me faltan funciones
+                // elementales
+     
+    // ME DA ERROR AQUI pero es normal porque no puedo sacar informacion de GAme, pues para la P2 no esta terminada.
+    // nplayer
+    //Game juego= new Game(3);
+    //System.out.println("Jugador creado:" + juego.getGameState());
+    
+       
+    
     }        
 }
    

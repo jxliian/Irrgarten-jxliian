@@ -18,7 +18,7 @@ public class Player {
     private static final int HITS2LOSE=3;
     
     private String name;
-    private char number;
+    private char number=0;
     private float intelligence;
     private float strength;
     private float health;
@@ -35,6 +35,7 @@ public class Player {
     Player(char number, float intelligence, float strength){
         
         this.name="Player #"+number;
+        this.number=number;
         this.intelligence=intelligence;
         this.strength=strength;
         this.health=INITIAL_HEALTH;
@@ -95,7 +96,7 @@ public class Player {
     
     @Override
     public String toString(){
-        return "P[" + name + " , " + consecutiveHits + " , " + row + " , " + col + " , " + health + " , " +number + ", "+ strength + ", "+ intelligence +"]";
+        return "P[ nombre:" + name + " , golpes_consecutivos:" + consecutiveHits + " ,  fila:" + row + " , columna:" + col + " , salud: " + health + " , numero:" +number + ", fuerza:"+ strength + ", inteligencia:"+ intelligence +"]";
     }
     
     private void receiveWeapon(Weapon w){ // P3
