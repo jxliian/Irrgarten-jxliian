@@ -19,6 +19,7 @@ public class Labyrinth {
     private static final char EXIT_CHAR='E';
     private static final int ROW=0;
     private static final int COL=1;
+    private static final int INVALID_POS=-1;
     private int nRows, nCols, exitRow, exitCol;
     
     //matriz estatica de los monstruos en el labyrinth
@@ -52,9 +53,15 @@ public class Labyrinth {
         this.labyrinth[exitRow][exitCol]=EXIT_CHAR;
     }
     
-    //P3
+    
     public void spreadPlayers(ArrayList<Player> players){
-        throw new UnsupportedOperationException();
+        
+        Player p;
+        for (int i=0; i< players.size();i++){
+            p=players.get(i);
+            int [] pos = randomEmptyPos();
+            this.putPlayer2D(INVALID_POS, INVALID_POS, pos[ROW], pos[COL], p);
+        }
     }
     
     public boolean haveAWinner(){
@@ -106,9 +113,20 @@ public class Labyrinth {
     }
    
     
-    //p3
     public ArrayList<Directions> validMoves(int row, int col){
-        throw new UnsupportedOperationException();
+    
+        ArrayList<Directions> output = new ArrayList<>();
+
+        if (canStepOn(row+1, col))
+            output.add(Directions.DOWN);
+        if (canStepOn(row-1, col))
+            output.add(Directions.UP);
+        if (canStepOn(row, col+1))
+            output.add(Directions.RIGHT);
+        if (canStepOn(row, col-1))
+            output.add(Directions.LEFT);
+
+        return output;
     }
     
     // devuelve true si esta dentro, false si no

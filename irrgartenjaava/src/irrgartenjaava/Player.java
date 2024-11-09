@@ -132,7 +132,23 @@ public class Player {
     }
     
     private void receiveWeapon(Weapon w){ // P3
-        throw new UnsupportedOperationException();
+        
+        Weapon wi;
+        Dice dados= new Dice();
+        for(int i=0; i<weapons.size(); i++){
+            wi=weapons.get(i);
+            boolean discard= wi.discard(dados);
+            
+            if(discard){
+                weapons.remove(wi);
+            }
+            
+            int size=weapons.size();
+            
+            if (size < MAX_SHIELDS){
+                weapons.add(w);
+            }
+        }
     }
     
     private void receiveShield(Shield s){
