@@ -104,12 +104,40 @@ public class Labyrinth {
     
     //P3
     public Monster putPlayer(Directions direction, Player player){
-        throw new UnsupportedOperationException();
+
+        int oldRow=player.getRow();
+        int oldCol=player.getCol();
+        
+        int[] newPos=this.dir2Pos(oldRow, oldCol, direction);
+        Monster monster=this.putPlayer2D(oldRow, oldCol, newPos[ROW], newPos[COL], player);
+
+
+        return monster;
+
     }
     
     //p3
     public void addBlock(Orientation orientation, int startRow, int startCol, int length){
-        throw new UnsupportedOperationException();
+
+        int incRow=0;
+        int incCol=0;
+        
+        if (orientation==Orientation.VERTICAL){
+            incRow++;
+        } else {
+            incCol++;
+        }
+
+        int row=startRow;
+        int col=startCol;
+        
+        while (this.posOK(row, col) && (this.emptyPos(row, col)) && length>0){
+            this.labyrinth[row][col]=BLOCK_CHAR;
+            length-=1;
+            row+=incRow;
+            col+=incCol;
+        }
+
     }
    
     
@@ -229,11 +257,35 @@ public class Labyrinth {
         return pos_a_devolver;
     }
     
-    //P3
     private Monster putPlayer2D(int oldRow, int oldCol, int row, int col, Player player){
-        throw new UnsupportedOperationException();    
+        
+        Monster output=null;
+        
+        if(this.canStepOn(row, col)){
+               if(this.posOK(row, col)){
+                   if(players[oldRow][oldCol]==player){
+                       this.updateOldPos(oldRow, oldCol);
+                       this.players[oldRow][oldCol]=null;
+                   }
+               }
+
+
+            if (this.monsterPos(row, col)){
+                this.labyrinth[row][col]=COMBAT_CHAR;
+                output=this.monsters[row][col];
+
+            }else {
+                this.labyrinth[row][col]=player.getNumber();
+            }
+
+            this.players[row][col]=player;
+            player.setPos(row,col);
+
+        }
+        
+        return output;
+
     }
-    
     
 } // fin clase
 
