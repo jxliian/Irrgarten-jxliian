@@ -4,6 +4,10 @@
  */
 package irrgartenjaava;
 
+
+import irrgartenjaava.controller.Controller;
+import irrgartenjaava.UI.TextUI;
+
 import java.util.ArrayList;
 
 /**
@@ -19,8 +23,8 @@ public class Irrgartenjaava {
      */
     public static void main(String[] args) {
      
-   
-   Weapon espada = new Weapon(0,0);
+/*   
+        Weapon espada = new Weapon(0,0);
         Shield escudo = new Shield(2,3);
         Dice dados = new Dice();
         
@@ -142,7 +146,18 @@ public class Irrgartenjaava {
     //System.out.println("Jugador creado:" + juego.getGameState());
     
        
+    */
+//------------------------------------------------------ inicializacion del juego
+
     
+        final int N_PLAYERS = 1;
+
+        TextUI vista= new TextUI();
+        Game juego = new Game(N_PLAYERS);
+        Controller controlador = new Controller(juego,vista);
+
+        controlador.play();
+
     }        
 }
    
