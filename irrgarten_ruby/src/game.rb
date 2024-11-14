@@ -12,26 +12,21 @@ module Irrgarten
     @@MAX_ROUNDS = 10
 
     # numero de filas y columnas del laberinto
-    @@ROWS = 4
-    @@COLS = 4
+    @@ROWS = 7
+    @@COLS = 7
 
-    @INIT_MONSTER=[["Monster 0", 0,0],
-                  ["Monster 1", 0,3],
-                  ["Monster 2", 3,0],
-                  ["Monster 3", 3,3]]
+    @@INIT_MONSTER=[["Monster 0", 0,0],
+                  ["Monster 1", 1,1]]
     
-    @@BLOCKS = [[Orientation::HORIZONTAL, 7, 7, 3],
-                [Orientation::VERTICAL, 5, 5, 4],
-                [Orientation::HORIZONTAL, 3, 3, 5],
-                [Orientation::VERTICAL, 1, 1, 6]]
+    @@BLOCKS = [[Orientation::HORIZONTAL, 0, 1, 3],
+                [Orientation::VERTICAL, 3, 3, 4]]
 
     def initialize(nplayers)
       @players= Array.new
       @monsters=Array.new
 
       nplayers.times do |i|
-        @players.push(Player.new("Player "+i.to_s,
-        Dice.random_intelligence()), Dice.random_strength())
+        @players.push(Player.new("Player " + i.to_s, Dice.random_intelligence(), Dice.random_strength()))
       end
 
       @current_player_index=Dice.who_starts(nplayers)
@@ -46,7 +41,39 @@ module Irrgarten
     end
 
     #P3
-    #def next_step(preferred_direction)
+    def next_step(preferred_direction)
+
+      @log=""
+      dead=@current_player.dead
+
+      if !dead
+        direction=self.actual_direction(preferred_direction)
+
+        if direction!=preferred_direction
+          self.log_player_no_orders()
+        end
+
+        monster=@labyrinth.put_player(direction, @current_player)
+
+        if monster == nil 
+          self.log_no_monster()
+        else
+          winner=self.combat(monster)
+          self.manage_reward(winner)
+        end
+      else 
+        self.manage_resurrection()
+      end
+
+      endGame=self.finished()
+
+      if !endGame
+        self.next_player()
+      end
+
+      return endGame
+
+    end  
 
     def finished()
       return @labyrinth.have_a_winner
@@ -67,7 +94,7 @@ module Irrgarten
         info_monster+=monster.to_s + "\n"
       end
 
-      return game_state.new(@labyrinth.to_s, info_player, info_monster, @current_player.to_s, self.finished(), @log)
+      return Game_state.new(@labyrinth.to_s, info_player, info_monster, @current_player_index, self.finished(), @log)
 
     end
 
@@ -80,7 +107,7 @@ module Irrgarten
             @labyrinth.add_block(orientation, row, col, length)
           end 
 
-          @INIT_MONSTER.each do |monster_info|
+          @@INIT_MONSTER.each do |monster_info|
             name, row, col = monster_info
             
             monster=(Monster.new(name, row, col, Dice.random_intelligence(), Dice.random_strength()))
@@ -98,17 +125,68 @@ module Irrgarten
         end 
 
         #p3
-        #def actual_direction(preferred_direction)
+        def actual_direction(preferred_direction)
+
+          current_row=@current_player.row
+          current_col=@current_player.col
+          valid_moves=@labyrinth.valid_moves(current_row, current_col)
+
+          output=@current_player.move(preferred_direction, valid_moves)
+
+          return output
+
+        end
+
 
         #p3
-        #def combat(monster)
+        
+        def combat(monster)
+
+          rounds=0
+          winner=GameCharacter::PLAYER
+
+          lose=monster.defend(@current_player.attack())
+
+          while (!lose && rounds<@@MAX_ROUNDS)
+            winner=GameCharacter::MONSTER
+            lose=@current_player.defend(monster.attack())
+            rounds+=1
+
+            if(!lose)
+              winner=GameCharacter::PLAYER
+              lose=monster.defend(@current_player.attack())
+            end
+
+
+          end
+
+          self.log_rounds(rounds, @@MAX_ROUNDS)
+          return winner
+        end
+
 
         #p3
-        #def manage_reward(winner)
+        def manage_reward(winner)
+
+          if winner==GameCharacter::PLAYER
+            @current_player.receive_reward()
+            log_player_won
+          else
+            log_monster_won
+          end
+        end
 
         #p3
-        #def manage_resurrection()
+        def manage_resurrection()
 
+          if(Dice.resurrect_player())
+            @current_player.resurrect()
+            log_resurrected
+          else
+            log_player_skip_turn
+          end
+        end
+        
         def log_player_won()
         @log+="Jugador #{@current_player_index}  ha ganado la partida"
         end

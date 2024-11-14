@@ -18,6 +18,9 @@ module Irrgarten
     @@COMBAT_CHAR='C'
     # Caracter para representar una salida
     @@EXIT_CHAR='E'
+    # Posicion invalida
+    @@INVALID_POS=-1
+
 
     # Variables que representan filas y columnas
     @@ROW =0
@@ -46,14 +49,18 @@ module Irrgarten
     end  
 
     #P3
-    #def spread_players(players)
+    def spread_players(players)
+
+      players.each do |p|
+        pos=self.random_empty_pos()
+        self.put_player_2D(@@INVALID_POS, @@INVALID_POS, pos[@@ROW], pos[@@COL], p)
+      end
+
+
+    end
 
     def have_a_winner()
-      if @labyrinth[@exit_row][@exit_col]==@@EXIT_CHAR
-        return true
-      else 
-        return false
-      end
+      return @players[@exit_row][@exit_col] != nil
     end
 
     # esta no se si esta bien, lo hacen con 
@@ -73,13 +80,64 @@ module Irrgarten
     end  
 
     # P3
-    # def put_player(direction, player)
+    def put_player(direction, player)
+
+      old_row=player.row
+      old_col=player.col
+
+      new_pos=self.dir_2_pos(old_row, old_col, direction)
+
+      monster=self.put_player_2D(old_row, old_col, new_pos[@@ROW], new_pos[@@COL], player)
+
+      return monster
+
+    end
+
 
     # P3
-    # def add_block(orientation, start_row, start_col, length)
+    def add_block(orientation, start_row, start_col, length)
+
+      if orientation==Orientation::HORIZONTAL
+        inc_row=0
+        inc_col=1
+      else
+        inc_row=1
+        inc_col=0
+      end
+
+      row=start_row
+      col=start_col
+
+      while (pos_ok(row, col) && empty_pos(row,col) && length>0)
+        @labyrinth[row][col]=@@BLOCK_CHAR
+        row+=inc_row
+        col+=inc_col
+        length-=1
+      end
+
+    end
+
 
     # P3
-    # def valid_moves(row, col)
+    def valid_moves(row, col)
+
+      output=Array.new
+
+      if (self.can_step_on(row+1,col))
+        output.push(Directions::DOWN)
+      end
+      if (self.can_step_on(row-1,col))
+        output.push(Directions::UP)
+      end
+      if (self.can_step_on(row,col+1))
+        output.push(Directions::RIGHT)
+      end
+      if (self.can_step_on(row,col-1))
+        output.push(Directions::LEFT)
+      end
+
+      return output
+    end
 
     private 
     def pos_ok(row, col)
@@ -179,7 +237,36 @@ module Irrgarten
     end
 
     # P3
-    # def put_player_2D(old_row, old_col, row, col, player)
+    def put_player_2D(old_row, old_col, row, col, player)
+
+      output=nil
+
+      if (self.can_step_on(row,col))
+        if(self.pos_ok(old_row,old_col))
+          p=@players[old_row][old_col]
+
+          if (p==player)
+            self.update_old_pos(old_row, old_col)
+            @players[old_row][old_col]=nil
+          end
+        end
+
+        monster_pos=self.monster_pos(row, col)
+
+        if (monster_pos)
+          @labyrinth[row][col]=@@COMBAT_CHAR
+          output=@monsters[row][col]
+        else
+          @labyrinth[row][col]=player.number
+        end
+
+        @players[row][col]=player
+        player.set_pos(row, col)
+      end
+
+      return output
+
+    end
 
   end # class Labyrinth
 

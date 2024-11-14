@@ -150,7 +150,7 @@ public class Irrgartenjaava {
 //------------------------------------------------------ inicializacion del juego
 
     
-        final int N_PLAYERS = 1;
+        final int N_PLAYERS = 2;
 
         TextUI vista= new TextUI();
         Game juego = new Game(N_PLAYERS);

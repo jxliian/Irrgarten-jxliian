@@ -14,19 +14,19 @@ public class Game {
     
     // ....................................... LABYRYNTH STUFF ..........................................
     
-    // rows del laberinto
-    private static final int ROWS=7;
+    // rows del laberinto COMO QUIERA
+    private static final int ROWS=5;
     // cols del laberinto
-    private static final int COLS=7;
+    private static final int COLS=4;
     
     //numero de monstruos en el laberinto e inicializacion
     
-    private static final int NUM_MONSTERS=3;
-    // al azar vaya
-    private static final int [][] INIT_MONSTERS = {{3,2}, {1,1}, {2,2}, {3,3}, {1,3}};
+    private static final int NUM_MONSTERS=2;
+    // defino AQUI LOS MONSTRUOS Y EL NUMERO COMO QUIERA
+    private static final int [][] INIT_MONSTERS = {{3,1}, {0,2}};
 
     //NUM de obstaculos
-    private static final int NUM_BLOCKS=4;
+    private static final int NUM_BLOCKS=1;
     
     //................................. REST PERSONALIZATION .....................................
     
@@ -54,9 +54,9 @@ public class Game {
     fumadon historico, para settear los muros, con el tipo object,
     una especie de auto de c++ para castear a lo que sea necesario despues
     */ 
+    //AQUI DEFINO LOS BLOQUES COMO QUIERA
     private static final Object [][] INIT_BLOCKS=
-    { {Orientation.HORIZONTAL,0,0,3}, {Orientation.HORIZONTAL,3,3,5}, 
-      {Orientation.VERTICAL,  5,6,2}, {Orientation.VERTICAL,  6,5,3} };
+    { {Orientation.HORIZONTAL,2,1,3}};
     
     
     /*
@@ -88,16 +88,21 @@ public class Game {
         this.currentPlayerIndex=Dice.whoStarts(nplayers);
         this.currentPlayer=this.players.get(this.currentPlayerIndex);
         
-        // defino la salida
+        // defino la salida random
         
-        int exitRow=Dice.randomPos(ROWS);
-        int exitCol=Dice.randomPos(COLS);
+        //int exitRow=Dice.randomPos(ROWS);
+        //int exitCol=Dice.randomPos(COLS);
+        
+        //definir la salida como yo quiera
+        int exitRow=0;
+        int exitCol=0;
         
         //inicializo el laberinto y llamamos a configure
         this.labyrinth = new Labyrinth(ROWS, COLS, exitRow, exitCol);
         this.configureLabyrinth();
         
         // lanzo los jugadores por el laberinto con spread
+        // en spread podre modificarlo para ponerlos donde yo quiera
         this.labyrinth.spreadPlayers(this.players);
         
         // si llega hasta aqui, todo se cumplio asi que log:
@@ -207,6 +212,10 @@ public class Game {
     
     private GameCharacter combat(Monster monster){
 
+        /*  
+        //------------------------------------------------------------------------------------------------------------
+        // VERSION 1.0 diagrama, siempre gana player
+        
         int rounds=0;
         GameCharacter winner=GameCharacter.PLAYER;
         
@@ -224,10 +233,98 @@ public class Game {
                 winner=GameCharacter.PLAYER;
                 lose=monster.defend(playerAttack);
             }
+            
         }
 
         this.logRounds(rounds, MAX_ROUNDS);
         
+        return winner;
+        */
+        
+ 
+    /* 
+        //-------------------------------------------------------------------------------------------------------------------
+        // VERSION 2.0, casi siempre gana monster hasta morir.
+        
+        int rounds = 0;
+        GameCharacter winner = GameCharacter.PLAYER;
+    // El jugador ataca primero
+    float playerAttack = this.currentPlayer.attack();
+    boolean lose = monster.defend(playerAttack); // El monstruo defiende el ataque del jugador
+    
+    while (!lose && rounds < MAX_ROUNDS) {
+        winner=GameCharacter.MONSTER;
+        rounds++;
+        
+        // Ahora el monstruo ataca
+        float monsterAttack = monster.attack();
+        lose = this.currentPlayer.defend(monsterAttack); // El jugador defiende el ataque del monstruo
+        
+        // Si el jugador no ha perdido, vuelve a atacar
+        if (!lose) {
+            playerAttack = this.currentPlayer.attack();
+            winner=GameCharacter.PLAYER;
+            lose = monster.defend(playerAttack);
+        }
+        
+        // Si el jugador ha perdido, el monstruo es el ganador
+        if (lose) {
+            winner = GameCharacter.MONSTER;
+            break;
+        }
+    }
+
+        // Si el jugador pierde, recibir daño del monstruo
+        if (winner == GameCharacter.MONSTER) {
+            float monsterDamage = monster.attack();
+            this.currentPlayer.defend(monsterDamage); // El jugador recibe el daño del monstruo
+        }
+
+        this.logRounds(rounds, MAX_ROUNDS);
+        return winner; 
+
+*/
+    //--------------------------------------------------------------------------------------------------------------------------
+    // VERSION 3.0 aparentemente esta funciona mas o menos
+    int rounds = 0;
+    GameCharacter winner = GameCharacter.PLAYER;
+
+    // El jugador ataca primero
+    float playerAttack = this.currentPlayer.attack();
+    boolean lose = monster.defend(playerAttack); // El monstruo defiende el ataque del jugador
+
+    while (!lose && rounds < MAX_ROUNDS) {
+        winner = GameCharacter.MONSTER;
+        rounds++;
+
+        // Ahora el monstruo ataca
+        float monsterAttack = monster.attack();
+        lose = this.currentPlayer.defend(monsterAttack); // El jugador defiende el ataque del monstruo
+
+        // Si el jugador no ha perdido, vuelve a atacar
+        if (!lose) {
+            playerAttack = this.currentPlayer.attack();
+            winner = GameCharacter.PLAYER;
+            lose = monster.defend(playerAttack);
+        }
+
+        // Si el jugador ha perdido, el monstruo es el ganador
+        if (lose) {
+            winner = GameCharacter.MONSTER;
+            break;
+        }
+    }
+
+        // Si el monstruo gana, debe aplicar el daño al jugador
+        if (winner == GameCharacter.MONSTER) {
+            float monsterDamage = monster.attack();
+            this.currentPlayer.defend(monsterDamage); // El jugador recibe el daño del monstruo
+        }
+
+        // Log de los rounds
+        this.logRounds(rounds, MAX_ROUNDS);
+
+        // Retornar al ganador
         return winner;
     } 
     
@@ -275,7 +372,7 @@ public class Game {
     }
 
     private void logNoMonster(){
-        this.log+= "- Player "+this.currentPlayerIndex+" no es posible moverse a esta casilla.\n";    
+        this.log+= "- Player "+this.currentPlayerIndex+" se ha movido a una celda vacía o no le ha sido posible moverse.\n";    
     } // debo poner porque esta vacia??
 
     private void logRounds(int rounds, int max){

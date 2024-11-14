@@ -56,24 +56,28 @@ public class Labyrinth {
     
     public void spreadPlayers(ArrayList<Player> players){
         
-        Player p;
-        for (int i=0; i< players.size();i++){
+        //Player p;
+        /*for (int i=0; i< players.size();i++){
             p=players.get(i);
             int [] pos = randomEmptyPos();
             this.putPlayer2D(INVALID_POS, INVALID_POS, pos[ROW], pos[COL], p);
-        }
+        } //ESTO ES EL METODO PARA NPLAYERS*/
+        
+        // para dos players en especifico
+        
+        Player p1;
+        Player p2;
+        
+        p1=players.get(0);
+        p2=players.get(1);
+        
+        this.putPlayer2D(INVALID_POS, INVALID_POS, 1, 3, p1);
+        this.putPlayer2D(INVALID_POS, INVALID_POS, 4, 3, p2);
+
     }
     
     public boolean haveAWinner(){
-        boolean ganador=false;
-        // creo que asi si estaria bien
-        if(this.labyrinth[this.exitRow][this.exitCol]==EXIT_CHAR){
-            ganador=true;
-        } else {
-            ganador=false;
-        }
-
-        return ganador;
+        return (this.players[this.exitRow][this.exitCol]!=null);
     }
     
     @Override
@@ -259,32 +263,40 @@ public class Labyrinth {
     
     private Monster putPlayer2D(int oldRow, int oldCol, int row, int col, Player player){
         
-        Monster output=null;
-        
-        if(this.canStepOn(row, col)){
-               if(this.posOK(row, col)){
-                   if(players[oldRow][oldCol]==player){
-                       this.updateOldPos(oldRow, oldCol);
-                       this.players[oldRow][oldCol]=null;
-                   }
-               }
+         Monster output = null;  // Monstruo que hay en la casilla a la que se llega
 
+        if (canStepOn(row, col)){
 
-            if (this.monsterPos(row, col)){
+            if (posOK(oldRow, oldCol)){
+
+                // Si el jugador estaba en la casilla, se actualiza la casilla (liberándola en players)
+                // y se actualiza la posición antigua.
+                if (players[oldRow][oldCol]==player){
+                    
+                    updateOldPos(oldRow, oldCol);
+                    this.players[oldRow][oldCol]=null;                    
+                }
+            }
+
+            // Si llego a una casilla con monstruo, se devuelve el monstruo y se actualiza a COMBAT_CHAR
+            if (monsterPos(row, col)){
                 this.labyrinth[row][col]=COMBAT_CHAR;
-                output=this.monsters[row][col];
-
-            }else {
+                output = this.monsters[row][col];
+            }
+            else{
+                // No hay monstruo. Simplemente reflejo el jugador en la casilla
                 this.labyrinth[row][col]=player.getNumber();
             }
 
+            // Actualizo la posición del jugador
             this.players[row][col]=player;
-            player.setPos(row,col);
+            player.setPos(row, col);
+            
+        } // canStepOn(row, col)
 
-        }
-        
         return output;
-
+        
+        
     }
     
 } // fin clase

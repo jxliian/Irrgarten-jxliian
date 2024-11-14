@@ -11,13 +11,14 @@ module Irrgarten
 
     @@INITIAL_HEALTH = 5.0
 
-    def initialize(name, intelligence, strength)
+    ## estos argumentos de row y col no deberia de ponerlos, estoy debugeando
+    def initialize(name, intelligence, strength, row, col)
       @name = name
       @intelligence = intelligence
       @strength = strength
       @health = @@INITIAL_HEALTH
-      @row = 0
-      @col = 0
+      @row=row
+      @col=col
     end
 
     def dead()
@@ -32,8 +33,23 @@ module Irrgarten
       return Dice.intensity(get_strength())
     end
 
-    #def defend(@receivedAttack);
     # p3
+    def defend(received_attack)
+
+      is_dead=dead
+
+      if (!is_dead)
+
+        defensive_energy=Dice.intensity(@intelligence)
+        if (defensive_energy<received_attack)
+          got_wounded
+          is_dead=dead
+        end
+      end
+
+      return is_dead
+    end
+    
 
     def set_pos(rows, column)
       @row = rows;

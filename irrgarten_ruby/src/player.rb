@@ -36,21 +36,25 @@ module Irrgarten
       @consecutive_hits=0
     end
 
-    #consultores para los atributos
-    #no se si todos son necesarios
+        # Consultor de @number
+        # @return [char] número del jugador
+        attr_reader :number
+        attr_reader :col
+        attr_reader :row
+
 
     protected
-    # asi pueden acceder en la misma clase
-    # pero no fuera de ella
-    attr_reader :weapons
-    attr_reader :shields
-    attr_reader :health
-    attr_reader :intelligence
-    attr_reader :strength
-    attr_reader :consecutive_hits
-    attr_reader :row
-    attr_reader :col
-    attr_reader :number
+        # Consultor de @weapons
+        # @return [Array<Weapon>] array de armas del jugador
+        attr_reader :weapons
+
+        # Consultor de @shields
+        # @return [Array<Shield>] array de escudos del jugador
+        attr_reader :shields
+
+        # Consultor de @consecutive_hits
+        # @return [int] número de golpes consecutivos recibidos
+        attr_reader :consecutive_hits
 
 
     public
@@ -82,9 +86,24 @@ module Irrgarten
   
     end
 
-    #def move(direction, valid_moves)
     #p3
+    def move(direction, valid_moves)
 
+      size=valid_moves.size
+      contained=valid_moves.include?(direction)
+
+      if size > 0 && !contained
+        aux=valid_moves[0]
+      else 
+        aux=direction
+      end
+
+      return aux
+
+
+    end
+    
+    
     def attack()
       return @strength+sum_weapons()
     end
@@ -92,19 +111,53 @@ module Irrgarten
     def defend(received_attack)
       return manage_hit(received_attack)
     end
-
-    #def receive_reward()
+    
     #p3
+    def receive_reward()
+      
+      wReward=Dice.weapon_reward()
+      sReward=Dice.shield_reward()
+
+      wReward.times do |i|
+        receive_weapon(self.new_weapon)
+      end
+
+      sReward.times do |i|
+        receive_shield(self.new_shield)
+      end
+
+      @health+=Dice.health_reward()
+
+    end
 
     def to_s()
       return "P [#{@name} #{@consecutive_hits} #{@row} #{@col} #{@health} #{@number} #{@strength} #{@intelligence} ]"
     end
-
-    #def receive_weapon(w)
+    
     #p3
+    def receive_weapon(w)
+      
+      @weapons.delete_if do |wi|
+        wi.discard
+      end
 
-    #def receive_shield(s)
+      if (@weapons.length < @@MAX_WEAPONS)
+        @weapons.push(w)
+      end
+
+    end
+
     #p3
+    def receive_shield(s)
+    
+      @shields.delete_if do |si|
+        si.discard
+      end
+
+      if (@shields.length < @@MAX_SHIELDS)
+        @shields.push(s)
+      end
+    end
 
     def new_weapon()
       espadita=Weapon.new(Dice.weapon_power(),Dice.uses_left())
@@ -138,8 +191,32 @@ module Irrgarten
       return @intelligence+sum_shields()
     end
 
-    #def manage_hit(received_attack)
     #p3
+    def manage_hit(received_attack)
+      
+      defense=self.defensive_energy()
+
+      if(defense<received_attack)
+        self.got_wounded()
+        self.inc_consecutive_hits()
+
+      else
+        self.reset_hits()
+
+      end
+
+      if ((@@consecutive_hits==@@HITS2LOSE) || self.dead)
+
+        self.reset_hits()
+        lose = true 
+
+      else
+        lose = false
+
+      end
+
+      return lose
+    end
 
     def reset_hits()
       @consecutive_hits=0
