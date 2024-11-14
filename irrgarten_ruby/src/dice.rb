@@ -57,7 +57,7 @@ module Irrgarten
       @@generator.rand(@@MAX_SHIELD.to_f)
     end
 
-    def uses_left()
+    def self.uses_left
       @@generator.rand(@@MAX_USES.to_i+1)
     end      
 

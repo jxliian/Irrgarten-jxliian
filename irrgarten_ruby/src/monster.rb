@@ -12,13 +12,11 @@ module Irrgarten
     @@INITIAL_HEALTH = 5.0
 
     ## estos argumentos de row y col no deberia de ponerlos, estoy debugeando
-    def initialize(name, intelligence, strength, row, col)
+    def initialize(name, intelligence, strength)
       @name = name
       @intelligence = intelligence
       @strength = strength
       @health = @@INITIAL_HEALTH
-      @row=row
-      @col=col
     end
 
     def dead()

@@ -110,7 +110,7 @@ module Irrgarten
           @@INIT_MONSTER.each do |monster_info|
             name, row, col = monster_info
             
-            monster=(Monster.new(name, row, col, Dice.random_intelligence(), Dice.random_strength()))
+            monster=(Monster.new(name, Dice.random_intelligence(), Dice.random_strength()))
             @monsters.push(monster)
             @labyrinth.add_monster(row, col, monster)
           
@@ -143,17 +143,17 @@ module Irrgarten
         def combat(monster)
 
           rounds=0
-          winner=GameCharacter::PLAYER
+          winner=Game_character::PLAYER
 
           lose=monster.defend(@current_player.attack())
 
           while (!lose && rounds<@@MAX_ROUNDS)
-            winner=GameCharacter::MONSTER
+            winner=Game_character::MONSTER
             lose=@current_player.defend(monster.attack())
             rounds+=1
 
             if(!lose)
-              winner=GameCharacter::PLAYER
+              winner=Game_character::PLAYER
               lose=monster.defend(@current_player.attack())
             end
 
@@ -168,7 +168,7 @@ module Irrgarten
         #p3
         def manage_reward(winner)
 
-          if winner==GameCharacter::PLAYER
+          if winner==Game_character::PLAYER
             @current_player.receive_reward()
             log_player_won
           else

@@ -33,7 +33,7 @@ module Irrgarten
       @weapons=Array.new
       @shields=Array.new
 
-      @consecutive_hits=0
+      @@consecutive_hits=0
     end
 
         # Consultor de @number
@@ -41,7 +41,6 @@ module Irrgarten
         attr_reader :number
         attr_reader :col
         attr_reader :row
-
 
     protected
         # Consultor de @weapons
@@ -115,8 +114,8 @@ module Irrgarten
     #p3
     def receive_reward()
       
-      wReward=Dice.weapon_reward()
-      sReward=Dice.shield_reward()
+      wReward=Dice.weapons_reward()
+      sReward=Dice.shields_reward()
 
       wReward.times do |i|
         receive_weapon(self.new_weapon)
@@ -160,13 +159,13 @@ module Irrgarten
     end
 
     def new_weapon()
-      espadita=Weapon.new(Dice.weapon_power(),Dice.uses_left())
-      return espadita
+      
+      return Weapon.new(Dice.weapon_power,Dice.uses_left)
     end
 
     def new_shield()
-      escudito=Shield.new(Dice.shield_power(),Dice.uses_left())
-      return escudito
+      
+      return Shield.new(Dice.shield_power,Dice.uses_left)
     end
 
     #espero que este bien hecho, la vd nls
@@ -205,7 +204,7 @@ module Irrgarten
 
       end
 
-      if ((@@consecutive_hits==@@HITS2LOSE) || self.dead)
+      if ((@consecutive_hits==@@HITS2LOSE) || self.dead)
 
         self.reset_hits()
         lose = true 
@@ -227,7 +226,7 @@ module Irrgarten
     end
 
     def inc_consecutive_hits()
-      @consecutive_hits+=1
+      @@consecutive_hits+=1
     end
 
   end #end class
