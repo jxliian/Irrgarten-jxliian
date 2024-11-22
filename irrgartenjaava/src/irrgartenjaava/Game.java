@@ -212,7 +212,7 @@ public class Game {
     
     private GameCharacter combat(Monster monster){
 
-        /*  
+          
         //------------------------------------------------------------------------------------------------------------
         // VERSION 1.0 diagrama, siempre gana player
         
@@ -226,7 +226,7 @@ public class Game {
             winner=GameCharacter.MONSTER;
             rounds++;
             float monsterAttack=monster.attack();
-            lose=monster.defend(monsterAttack);
+            lose=this.currentPlayer.defend(monsterAttack);
             
             if (!lose){
                 playerAttack=this.currentPlayer.attack();
@@ -239,93 +239,7 @@ public class Game {
         this.logRounds(rounds, MAX_ROUNDS);
         
         return winner;
-        */
-        
- 
-    /* 
-        //-------------------------------------------------------------------------------------------------------------------
-        // VERSION 2.0, casi siempre gana monster hasta morir.
-        
-        int rounds = 0;
-        GameCharacter winner = GameCharacter.PLAYER;
-    // El jugador ataca primero
-    float playerAttack = this.currentPlayer.attack();
-    boolean lose = monster.defend(playerAttack); // El monstruo defiende el ataque del jugador
-    
-    while (!lose && rounds < MAX_ROUNDS) {
-        winner=GameCharacter.MONSTER;
-        rounds++;
-        
-        // Ahora el monstruo ataca
-        float monsterAttack = monster.attack();
-        lose = this.currentPlayer.defend(monsterAttack); // El jugador defiende el ataque del monstruo
-        
-        // Si el jugador no ha perdido, vuelve a atacar
-        if (!lose) {
-            playerAttack = this.currentPlayer.attack();
-            winner=GameCharacter.PLAYER;
-            lose = monster.defend(playerAttack);
-        }
-        
-        // Si el jugador ha perdido, el monstruo es el ganador
-        if (lose) {
-            winner = GameCharacter.MONSTER;
-            break;
-        }
-    }
-
-        // Si el jugador pierde, recibir daño del monstruo
-        if (winner == GameCharacter.MONSTER) {
-            float monsterDamage = monster.attack();
-            this.currentPlayer.defend(monsterDamage); // El jugador recibe el daño del monstruo
-        }
-
-        this.logRounds(rounds, MAX_ROUNDS);
-        return winner; 
-
-*/
-    //--------------------------------------------------------------------------------------------------------------------------
-    // VERSION 3.0 aparentemente esta funciona mas o menos
-    int rounds = 0;
-    GameCharacter winner = GameCharacter.PLAYER;
-
-    // El jugador ataca primero
-    float playerAttack = this.currentPlayer.attack();
-    boolean lose = monster.defend(playerAttack); // El monstruo defiende el ataque del jugador
-
-    while (!lose && rounds < MAX_ROUNDS) {
-        winner = GameCharacter.MONSTER;
-        rounds++;
-
-        // Ahora el monstruo ataca
-        float monsterAttack = monster.attack();
-        lose = this.currentPlayer.defend(monsterAttack); // El jugador defiende el ataque del monstruo
-
-        // Si el jugador no ha perdido, vuelve a atacar
-        if (!lose) {
-            playerAttack = this.currentPlayer.attack();
-            winner = GameCharacter.PLAYER;
-            lose = monster.defend(playerAttack);
-        }
-
-        // Si el jugador ha perdido, el monstruo es el ganador
-        if (lose) {
-            winner = GameCharacter.MONSTER;
-            break;
-        }
-    }
-
-        // Si el monstruo gana, debe aplicar el daño al jugador
-        if (winner == GameCharacter.MONSTER) {
-            float monsterDamage = monster.attack();
-            this.currentPlayer.defend(monsterDamage); // El jugador recibe el daño del monstruo
-        }
-
-        // Log de los rounds
-        this.logRounds(rounds, MAX_ROUNDS);
-
-        // Retornar al ganador
-        return winner;
+     
     } 
     
     private void manageReward(GameCharacter winner){

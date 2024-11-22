@@ -137,7 +137,9 @@ public class Player {
         Dice dados= new Dice();
         for(int i=0; i<weapons.size(); i++){
             wi=weapons.get(i);
-            boolean discard= wi.discard(dados);
+            // por la p4, en discard quite el dados, recuerdalo
+            //por si da fallos
+            boolean discard= wi.discard();
             
             if(discard){
                 weapons.remove(wi);
@@ -157,7 +159,8 @@ public class Player {
         Dice dados= new Dice();
         for(int i=0; i<shields.size(); i++){
             si=shields.get(i);
-            boolean discard= si.discard(dados);
+            // lo mismo de la p4
+            boolean discard= si.discard();
             
             if(discard){
                 shields.remove(si);

@@ -7,38 +7,26 @@ package irrgartenjaava;
 /**
  *
  * @author julian
+ * 
+ * 
+ * @brief Clase actualizada con herencia P4
+ * 
  */
-public class Shield {
+public class Shield extends CombatElement {
 
-    // Private attributes
-    private float protection;
-    private int uses;
-    
     public Shield(float protection, int uses){
-        this.protection=protection; // da igual que lo llame igual, se diferencia con el this. en java
-        this.uses=uses;
-        
+        super(protection, uses);
     }
     
     public float protect(){
-        if (uses>0){
-            uses--;
-            return protection;
-        } else {
-            return 0;
-        }
+        return this.produceEffect();
     }
     
     @Override 
     public String toString(){
-        return "S[" + protection + " , " + uses + "]";
-        // Y con esto ya lo pasa solo a string
+        String a_devolver="S";
+        return a_devolver+=super.toString();
         
     }
-    
-    public boolean discard(Dice dados){
-        return dados.discardElement(uses);
-    }
-    
     
 }

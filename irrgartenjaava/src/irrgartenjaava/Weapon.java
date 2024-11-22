@@ -7,14 +7,12 @@ package irrgartenjaava;
 /**
  *
  * @author julian
+ * 
+ * @brief Clase actualizada a la P4 herencia
+ * 
  */
-public class Weapon {
-    
-// Private attributes
-    private float power;
-    private int uses;
-    
-    
+public class Weapon extends CombatElement{
+
   
     /**
      * Constructor clase weapon
@@ -24,37 +22,23 @@ public class Weapon {
      * 
      */
     public Weapon(float power, int uses){
-        this.power = power;
-        this.uses=uses;
+       super(power,uses);
         
     }
     
-// attack
+    // attack
     
     public float attack(){
         
-        if (uses >0){
-            uses--;
-            return power; // esta bien hacer esto??
-            
-        } else {
-            
-            return 0;
-        }
+        return this.produceEffect();
         
     }
     // Por que estamos modificando una funcion ya existente en su funcion padre.
     @Override 
     public String toString(){
-        return "W[" + power + " , " + uses + "]";
-        // Y con esto ya lo pasa solo a string
+        String a_devolver="W";
+        return a_devolver+=super.toString();
         
-    }
-    
-    public boolean discard(Dice dados){
-        return dados.discardElement(uses);
-    }
-    
-    
+    } 
     
 }

@@ -5,6 +5,7 @@
 package irrgartenjaava;
 
 import java.util.Random; // random lib
+import java.util.ArrayList;
 
 /**
  *
@@ -23,6 +24,7 @@ public class Dice {
     private static final int MAX_ATTACK = 3; //(máxima potencia de las armas)
     private static final int MAX_SHIELD = 2; // (máxima potencia de los escudos)
     private static final Random generator = new Random(); 
+    // private static final double BOOST_PROB = 0.35;
    
     // modelo ajustado a jdk 11
     
@@ -63,6 +65,12 @@ public class Dice {
         return generator.nextInt(HEALTH_REWARD+1);
         
     }
+    
+    /*
+    public static float hayBoost(){
+        return generator.nextFloat() <= BOOST_PROB;
+    } */
+    
     
     public static float weaponPower(){
         return generator.nextFloat()*MAX_ATTACK;
@@ -108,6 +116,23 @@ public class Dice {
         return generator.nextFloat() < probabilidad_inversa; 
         
     }
+    
+    
+    //P4
+    public Directions nextStep(Directions preference, ArrayList<Directions> validMoves, float intelligence){
+        
+        Directions devolver=preference;
+        
+        if(Dice.randomIntelligence()>intelligence){
+            int ind = generator.nextInt(validMoves.size());
+            devolver=validMoves.get(ind);
+        }
+        
+        return devolver;
+        
+    }
+    
+    
 }
 
 
