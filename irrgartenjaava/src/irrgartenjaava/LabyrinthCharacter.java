@@ -60,7 +60,7 @@ abstract class LabyrinthCharacter {
     
     
     //----------------------------------------------------------------------------------------------------
-    // getters y setters
+    // getters y setters y gotWounded TODOS PROTECTED
     
     protected float getIntelligence(){
         return this.intelligence;
@@ -78,8 +78,48 @@ abstract class LabyrinthCharacter {
         this.health=health;
     }
     
+    protected void gotWounded(){
+        this.health=this.health-1;
+    }
     
     
+    //----------------------------------------------------------------------------------------------------
+    // RESTO DE FUNCIONES PUBLICAS
     
+    public boolean dead(){
+        return (this.health<=0);
+    }
+    
+    public int getRow(){
+        return this.row;
+    }
+    
+    public int getCol(){
+        return this.col;
+    }
+    
+    public void setPos(int row, int col){
+        this.col=col;
+        this.row=row;
+    }
+    
+    @Override
+    public String toString(){
+         
+        //en formatom
+        final String FORMAT = "%.6f";
+        String toReturn=this.name+"["+"intelligence:"+ String.format(FORMAT, this.intelligence) + ", strength:"+String.format(FORMAT, this.strength);
+        toReturn+=", health:"+String.format(FORMAT, this.health)+", pos:("+this.row+", "+this.col+")]";
+        
+        return toReturn;
+    }
+    
+    
+    // Estos abstractos no hace falta rellenarlos
+    // funcionan como una especie de .h de c++
+   
+    public abstract float attack();
+    
+    public abstract boolean defend(float attack);
     
 }

@@ -8,50 +8,28 @@ package irrgartenjaava;
  *
  * @author jxlig0d
  */
-public class Monster {
+public class Monster extends LabyrinthCharacter {
     
+    // El resto de variables las eliminamos porque ya existen en super
     private static final int INITIAL_HEALTH=5;
-    private String name;
-    private float intelligence;
-    private float strength;
-    private float health;
-    private int row;
-    private int col;
     
     
     Monster(String name, float intelligence, float strength){
-        this.intelligence=intelligence;
-        this.name=name;
-        this.strength=strength;
-        this.health=INITIAL_HEALTH;
-        this.row=0;
-        this.col=0;
-
-        // esta no se si es necesaria
-        
-        // me falta lo de definir si no esta en ninguna casilla
-        // del laberinto?? x=y=-1?
+        super(name, intelligence, strength, INITIAL_HEALTH);
 
     }
     
-    public boolean dead(){
-        return health<=0;
-    }
-    
-    //auxiliar getter for private variable
-    public float getStrength(){
-        return strength;
-    }
-    
+    @Override
     public float attack(){
         return Dice.intensity(this.getStrength());
     }
     
+    @Override
     public boolean defend(float receivedAttack){
         
         boolean isDead=this.dead();
         if(!isDead){
-            float defensiveEnergy=Dice.intensity(this.intelligence);
+            float defensiveEnergy=Dice.intensity(this.getIntelligence());
             
             if (defensiveEnergy < receivedAttack){
                 this.gotWounded();
@@ -62,18 +40,10 @@ public class Monster {
         return isDead;
     } 
     
-    public void setPos(int row, int col){
-        this.row=row;
-        this.col=col;
-    }
-    
-    @Override
-    public String toString(){
-       return "M[ nombre:" + name + " , inteligencia:" + intelligence + " , fuerza: " + strength + " , salud: " + health + " , row: " + row + " , col: " + col + " ]";
-    }
-    
-    private void gotWounded(){
-        this.health=this.health-1;
-    }   // mal escrito?
+    // Creo que tambien sobra porque en la clase labyrinthcharacter, ya tenemos un tostring, aunque lo dejo aqui por si acaso
+    //@Override
+    //public String toString(){
+    //   return "M[ nombre:" + name + " , inteligencia:" + intelligence + " , fuerza: " + strength + " , salud: " + health + " , row: " + row + " , col: " + col + " ]";
+    //}
     
 }

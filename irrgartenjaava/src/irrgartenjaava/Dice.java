@@ -119,7 +119,7 @@ public class Dice {
     
     
     //P4
-    public Directions nextStep(Directions preference, ArrayList<Directions> validMoves, float intelligence){
+    public static Directions nextStep(Directions preference, ArrayList<Directions> validMoves, float intelligence){
         
         Directions devolver=preference;
         

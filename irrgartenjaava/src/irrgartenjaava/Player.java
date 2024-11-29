@@ -10,20 +10,14 @@ import java.util.ArrayList;
  *
  * @author jxlig0d
  */
-public class Player {
+public class Player extends LabyrinthCharacter {
     
     private static final int MAX_WEAPONS=2;
     private static final int MAX_SHIELDS=3;
     private static final int INITIAL_HEALTH=10;
     private static final int HITS2LOSE=3;
     
-    private String name;
-    private char number=0;
-    private float intelligence;
-    private float strength;
-    private float health;
-    private int row;
-    private int col;
+    private char number;
     private int consecutiveHits=0;
     
     //lista de weapons y shields
@@ -31,14 +25,12 @@ public class Player {
     private ArrayList<Weapon> weapons;
     private ArrayList<Shield> shields;
     
-    
+    // constructor normal
     Player(char number, float intelligence, float strength){
         
-        this.name="Player #"+number;
+        super("Player"+number, intelligence, strength, INITIAL_HEALTH );
+
         this.number=number;
-        this.intelligence=intelligence;
-        this.strength=strength;
-        this.health=INITIAL_HEALTH;
         this.consecutiveHits=0;
         // yo creo que asi esta bien
         // inicializar los array en blanco
@@ -47,37 +39,33 @@ public class Player {
         
     }
     
+    //constructor de copia.
+    public Player(Player other){
+        
+        super(other);
+        
+        this.number=other.number;
+        this.consecutiveHits=other.consecutiveHits;
+        
+        this.weapons= new ArrayList<>(other.weapons);
+        this.shields= new ArrayList<>(other.shields);
+
+    }
+    
     public void resurrect(){
         
         // Vaciar las listas 
         this.weapons.clear();
         this.shields.clear();
         
-        this.health= INITIAL_HEALTH;
-        this.consecutiveHits=0;
-    }
-    
-    public int getRow(){
-        return row;
-    }
-
-    public int getCol(){
-        return col;
+        this.setHealth(INITIAL_HEALTH);
+        this.resetHits();
     }
     
     public char getNumber(){
         return number;
     }
 
-    public void setPos(int row, int col){
-        this.row=row;
-        this.col=col;
-    }
-    
-    public boolean dead(){
-        return health<=0;       //true si health=0 si muerto
-    }
-    
     //creo que esta bien
     public Directions move(Directions direction, ArrayList<Directions>validMoves){
       
@@ -97,10 +85,13 @@ public class Player {
         
     } // directions [] me refiero
     
+    // actualizado de p4
+    @Override
     public float attack(){
-        return (this.strength+this.sumWeapons());
+        return (this.getStrength()+this.sumWeapons());
     }
     
+    @Override
     public boolean defend(float receivedAttack){
         return this.manageHit(receivedAttack);
     }
@@ -121,14 +112,42 @@ public class Player {
         
         int extraHealth;
         
-        extraHealth=Dice.healthReward();
-        this.health+=extraHealth;
-        
+        this.setHealth(this.getHealth()+Dice.healthReward());        
     }
     
+    // Modificado para la p4, veremos como funciona
     @Override
     public String toString(){
-        return "P[ nombre:" + name + " , golpes_consecutivos:" + consecutiveHits + " ,  fila:" + row + " , columna:" + col + " , salud: " + health + " , numero:" +number + ", fuerza:"+ strength + ", inteligencia:"+ intelligence +"]";
+        //return "P[ nombre:" + name + " , golpes_consecutivos:" + consecutiveHits + " ,  fila:" + row + " , columna:" + col + " , salud: " + health + " , numero:" +number + ", fuerza:"+ strength + ", inteligencia:"+ intelligence +"]";
+        
+        String toReturn=super.toString();
+        toReturn+=" [ ch:"+this.consecutiveHits+", ";
+        
+        // Bucles para mostrar con un formato determinado el array de
+        // armas y escudos del jugador
+        String toWeapons="[";
+        int tamWeapons=this.weapons.size();
+        for(int i=0; i<tamWeapons-1; i++){
+            toWeapons+=this.weapons.get(i).toString()+", ";
+        }
+        if (tamWeapons>0)
+            toWeapons+=this.weapons.get(tamWeapons-1);
+        toWeapons+="]";
+        
+        String toShields="[";
+        int tamShields=this.shields.size();
+        for(int i=0; i<tamShields-1; i++){
+            toShields+=this.shields.get(i).toString()+", ";
+        }
+        if (tamShields>0)
+            toShields+=this.shields.get(tamShields-1);
+        toShields+="]";
+        
+        // Definimos el formato final para el toString
+        toReturn+="w:" + toWeapons+", sh:"+toShields+" ]";
+        
+        return toReturn;
+    
     }
     
     private void receiveWeapon(Weapon w){ // P3
@@ -184,14 +203,14 @@ public class Player {
         return escudito;
     }
     
-    private float sumWeapons(){
+    protected float sumWeapons(){
         float sum=0;
         for (int i=0; i < weapons.size(); i++){
             sum+= weapons.get(i).attack();
         }
         return sum;      }
     
-    private float sumShields(){ // el panas
+    protected float sumShields(){ // el panas
         float sum=0;
         for (int i=0; i < shields.size(); i++){
             sum+= shields.get(i).protect();
@@ -199,8 +218,8 @@ public class Player {
         return sum;   
     }
     
-    private float defensiveEnergy(){
-        return (this.intelligence + this.sumShields());     
+    protected float defensiveEnergy(){
+        return (this.getIntelligence() + this.sumShields());     
     }
    
     private boolean manageHit(float receivedAttack){
@@ -227,10 +246,6 @@ public class Player {
     
     private void resetHits(){
         this.consecutiveHits=0;
-    }
-   
-    private void gotWounded(){
-        this.health-=1;
     }
     
     private void incConsecutiveHits(){
