@@ -143,6 +143,16 @@ public class Labyrinth {
         }
 
     }
+    
+    //P4
+    // metodo para usar el convertidor de fuzzy player
+    // una vez que se esta manejando la resurrection
+    public void convertToFuzzy(FuzzyPlayer other){
+        int row=other.getRow();
+        int col=other.getCol();
+        if(this.players[row][col].getNumber() == other.getNumber())
+            this.players[row][col]=other;
+    }
    
     
     public ArrayList<Directions> validMoves(int row, int col){

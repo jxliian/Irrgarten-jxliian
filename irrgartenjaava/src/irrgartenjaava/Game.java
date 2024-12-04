@@ -259,6 +259,11 @@ public class Game {
         if (resurrect){
             this.currentPlayer.resurrect();
             this.logResurrected();
+            
+            FuzzyPlayer fuzzy= new FuzzyPlayer(this.currentPlayer);
+            this.players.set(this.currentPlayerIndex, fuzzy);
+            this.labyrinth.convertToFuzzy(fuzzy);
+            
         } else {
             this.logPlayerSkipTurn();
         }
@@ -274,7 +279,7 @@ public class Game {
     }        
 
     private void logResurrected(){
-        this.log+= "- Player "+this.currentPlayerIndex+" fue revivido.\n";    
+        this.log+= "- Player "+this.currentPlayerIndex+" fue revivido (fuzzy).\n";    
     }    
     
     private void logPlayerSkipTurn(){

@@ -11,7 +11,7 @@ package irrgartenjaava;
 public class Monster extends LabyrinthCharacter {
     
     // El resto de variables las eliminamos porque ya existen en super
-    private static final int INITIAL_HEALTH=5;
+    private static final int INITIAL_HEALTH=50000;
     
     
     Monster(String name, float intelligence, float strength){

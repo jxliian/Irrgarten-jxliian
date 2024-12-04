@@ -25,6 +25,11 @@ public class Player extends LabyrinthCharacter {
     private ArrayList<Weapon> weapons;
     private ArrayList<Shield> shields;
     
+    // lista de barajas de shield y weapon
+    private WeaponCardDeck weaponCardDeck;
+    private ShieldCardDeck shieldCardDeck;
+    
+    
     // constructor normal
     Player(char number, float intelligence, float strength){
         
@@ -36,6 +41,10 @@ public class Player extends LabyrinthCharacter {
         // inicializar los array en blanco
         this.weapons= new ArrayList<>();
         this.shields= new ArrayList<>();
+        
+        // inicializamos los array
+        this.weaponCardDeck= new WeaponCardDeck();
+        this.shieldCardDeck= new ShieldCardDeck();
         
     }
     
@@ -49,6 +58,9 @@ public class Player extends LabyrinthCharacter {
         
         this.weapons= new ArrayList<>(other.weapons);
         this.shields= new ArrayList<>(other.shields);
+        
+        this.weaponCardDeck=other.weaponCardDeck;
+        this.shieldCardDeck= other.shieldCardDeck;
 
     }
     
@@ -193,14 +205,16 @@ public class Player extends LabyrinthCharacter {
         }
     }
     
+    // cambiado de la p4
     private Weapon newWeapon(){   
-        Weapon espadita = new Weapon(Dice.weaponPower(), Dice.usesLeft());
-        return espadita;
+        return this.weaponCardDeck.nextCard();
     }
     
+    //cambiado de la p4
     private Shield newShield(){
-        Shield escudito = new Shield(Dice.shieldPower(), Dice.usesLeft());
-        return escudito;
+        return this.shieldCardDeck.nextCard();
+        //Shield escudito = new Shield(Dice.shieldPower(), Dice.usesLeft());
+        //return escudito;
     }
     
     protected float sumWeapons(){

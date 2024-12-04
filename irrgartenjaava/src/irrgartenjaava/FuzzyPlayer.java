@@ -7,7 +7,7 @@ package irrgartenjaava;
 import java.util.ArrayList;
 
 /**
- *
+ * // Aqui lo que me falta es lo de que cuando muere un player convertirlo en fuzzy al revivir, tendre que mirarlo en el constructor de player...
  * @author jxlig0d
  */
 public class FuzzyPlayer extends Player{
