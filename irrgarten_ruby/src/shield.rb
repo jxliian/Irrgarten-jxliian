@@ -3,36 +3,17 @@
 module Irrgarten
 
   require_relative 'dice'
+  require_relative 'combat_element'
 
-  class Shield
-
-    @protection #atributo de instancia de clase
-    @uses #atributo de instancia de clase
-
-    #constructor
-
-    def initialize(protection, uses)
-      @protection = protection.to_f
-      @uses = uses.to_i
-    end
+  class Shield < CombatElement
 
     def protect
-      if @uses >0
-        @uses-=1
-      return @protection
-      else 
-        return 0
-      end
+      self.produce_effect
     end
 
     def to_s
-      return "S: #{@protection} , #{@uses}"
+      return "S:" + super
 
-    end
-
-    def discard()
-      dados = Dice.new
-      dados.discard_element(@uses)
     end
 
   end #end class

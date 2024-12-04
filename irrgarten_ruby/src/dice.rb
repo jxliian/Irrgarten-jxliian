@@ -65,7 +65,7 @@ module Irrgarten
       @@generator.rand(competence.to_f)
     end
 
-    def discard_element(uses_left)
+    def self.discard_element(uses_left)
       probabilidad_inversa= (1-(uses_left.to_f/@@MAX_USES.to_f))
       
       if uses_left.to_i >= @@MAX_USES.to_i
@@ -78,7 +78,22 @@ module Irrgarten
       
       return @@generator.rand() < probabilidad_inversa
     end
+
+    # P4
+    def self.next_step(preference, valid_moves, intelligence)
+
+      a_devolver=preference
+
+        if(self.random_intelligence > intelligence)
+          random_pos=@@generator.rand(valid_moves.size)
+          a_devolver=valid_moves[random_pos]
+        end 
+
+      return a_devolver
   
+    end
+
+
   end #end class
 
 end #end module

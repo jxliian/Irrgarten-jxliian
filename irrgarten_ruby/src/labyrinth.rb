@@ -3,6 +3,7 @@
 require_relative 'directions'
 require_relative 'dice'
 require_relative 'orientation'
+require_relative 'fuzzy_player'
 
 module Irrgarten
 
@@ -73,7 +74,7 @@ module Irrgarten
 
     def add_monster(row, col, monster)
       if pos_ok(row, col) && empty_pos(row, col)
-        monster.set_pos(row, col)
+        monster.pos(row, col)
         @monsters[row][col]=monster
         @labyrinth[row][col]=@@MONSTER_CHAR
       end
@@ -116,6 +117,16 @@ module Irrgarten
       end
 
     end
+
+    # P4
+    def convert_to_fuzzy(fuzzy_player)
+      row = fuzzy_player.row
+      col = fuzzy_player.col
+
+      if (@players[row][col].number == fuzzy_player.number)
+          @players[row][col] = fuzzy_player
+      end
+  end
 
 
     # P3

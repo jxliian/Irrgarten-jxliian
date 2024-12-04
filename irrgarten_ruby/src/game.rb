@@ -3,6 +3,7 @@
 require_relative 'dice'
 require_relative 'labyrinth'
 require_relative 'game_state'
+require_relative 'fuzzy_player'
 
 module Irrgarten
 
@@ -26,7 +27,7 @@ module Irrgarten
       @monsters=Array.new
 
       nplayers.times do |i|
-        @players.push(Player.new("Player " + i.to_s, Dice.random_intelligence(), Dice.random_strength()))
+        @players.push(Player.new( i.to_s, Dice.random_intelligence(), Dice.random_strength()))
       end
 
       @current_player_index=Dice.who_starts(nplayers)
@@ -182,6 +183,15 @@ module Irrgarten
           if(Dice.resurrect_player())
             @current_player.resurrect()
             log_resurrected
+
+            fuzzy = FuzzyPlayer.new(@current_player)
+
+            # Modificamos en el array de jugadores
+            @players[@current_player_index] = fuzzy
+
+            # Modificamos en la tabla de jugadores en el laberinto
+            @labyrinth.convert_to_fuzzy(fuzzy)
+
           else
             log_player_skip_turn
           end
@@ -197,7 +207,7 @@ module Irrgarten
         end
 
         def log_resurrected
-          @log+="Jugador #{@current_player_index} ha sido resucitado"
+          @log+="Jugador #{@current_player_index} ha sido resucitado (fuzzy)"
         end  
 
         def log_player_skip_turn

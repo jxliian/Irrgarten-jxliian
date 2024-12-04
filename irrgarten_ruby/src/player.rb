@@ -3,10 +3,11 @@
 require_relative 'dice'
 require_relative 'weapon'
 require_relative 'shield'
+require_relative 'labyrinth_character'
 
 module Irrgarten
 
-  class Player 
+  class Player < LabyrinthCharacter
 
     #maximo numero de armas que puede tener un jugador
     @@MAX_WEAPONS=2; 
@@ -20,10 +21,10 @@ module Irrgarten
     #constructor
     def initialize(number, intelligence, strength)
     
-      @name="Player #"+number.to_s
-      @intelligence=intelligence
-      @strength=strength
-      @health=@@INITIAL_HEALTH
+      @name="P#"+number.to_s
+      @number=number.to_s
+      super(name, intelligence, strength, @@INITIAL_HEALTH)
+      
       @col=0
       @row=0
       # supongo que asi esta bien hecho el health
@@ -36,11 +37,7 @@ module Irrgarten
       @@consecutive_hits=0
     end
 
-        # Consultor de @number
-        # @return [char] número del jugador
         attr_reader :number
-        attr_reader :col
-        attr_reader :row
 
     protected
         # Consultor de @weapons
@@ -58,13 +55,22 @@ module Irrgarten
 
     public
 
-    def  resurrect()
+
+    def copy(other)
+      super
+      @number = other.number
+      @weapons = other.weapons
+      @shields = other.shields
+      @consecutive_hits = other.consecutive_hits
+    end
+
+    def resurrect()
 
       weapons.clear
       shields.clear
 
       @health=@@INITIAL_HEALTH
-      @consecutive_hits=0
+      reset_hits()
 
     end 
 
@@ -73,16 +79,6 @@ module Irrgarten
       @row=row
       @col=col
 
-    end
-
-    def get_pos()
-      return @row, @col
-    end
-
-    def dead()
-        
-      @health<=0
-  
     end
 
     #p3
@@ -98,13 +94,11 @@ module Irrgarten
       end
 
       return aux
-
-
     end
     
     
     def attack()
-      return @strength+sum_weapons()
+      return @strength+self.sum_weapons()
     end
 
     def defend(received_attack)
@@ -168,7 +162,7 @@ module Irrgarten
       return Shield.new(Dice.shield_power,Dice.uses_left)
     end
 
-    #espero que este bien hecho, la vd nls
+    #Esto en java se cambiaba con el carddeck, aqui no
     def sum_weapons()
       sum=0
       for i in 0..@weapons.size-1
@@ -177,7 +171,7 @@ module Irrgarten
       return sum
     end
 
-    #espero que este bien hecho, la vd nls
+#Esto en java se cambiaba con el carddeck, aqui no    
     def sum_shields()
       sum=0
       for i in 0..@shields.size-1
@@ -219,10 +213,6 @@ module Irrgarten
 
     def reset_hits()
       @consecutive_hits=0
-    end
-
-    def got_wounded()
-      @health-=1
     end
 
     def inc_consecutive_hits()
