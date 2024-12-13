@@ -7,6 +7,7 @@ package irrgartenjaava;
 
 import irrgartenjaava.controller.Controller;
 import irrgartenjaava.UI.TextUI;
+import irrgartenjaava.UI.Graphics;
 
 import java.util.ArrayList;
 
@@ -152,9 +153,9 @@ public class Irrgartenjaava {
     
         final int N_PLAYERS = 2;
 
-        TextUI vista= new TextUI();
+        Graphics vista = new Graphics();
         Game juego = new Game(N_PLAYERS);
-        Controller controlador = new Controller(juego,vista);
+        Controller controlador = new Controller(juego, vista);
 
         controlador.play();
 

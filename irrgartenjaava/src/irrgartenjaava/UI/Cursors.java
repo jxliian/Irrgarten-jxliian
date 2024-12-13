@@ -12,22 +12,21 @@ import irrgartenjaava.Directions;
  */
 public class Cursors extends javax.swing.JDialog {
 
-    // Direccion en la que se movera el jug.
-    private Directions direction;
-    
-    // Getter de la direccion
-    public Directions getDirection() {
-        setVisible(true);   // Hace visible la ventana y bloquea la ejecución hasta que se cierre
-        return this.direction;
-    }
-    
-    
     /**
      * Creates new form Cursors
      */
     public Cursors(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+    }  // Direccion en la que se movera el jug.
+    
+    
+    private Directions direction;
+    
+    // Getter de la direccion
+    public Directions getDirection() {
+        setVisible(true);   // Hace visible la ventana y bloquea la ejecución hasta que se cierre
+        return this.direction;
     }
 
     /**
@@ -40,70 +39,111 @@ public class Cursors extends javax.swing.JDialog {
     private void initComponents() {
 
         up_button = new javax.swing.JButton();
-        right_button = new javax.swing.JButton();
         left_button = new javax.swing.JButton();
+        right_button = new javax.swing.JButton();
         down_button = new javax.swing.JButton();
-        title = new javax.swing.JLabel();
+        titutlo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         up_button.setText("jButton1");
+        up_button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                up_buttonActionPerformed(evt);
+            }
+        });
 
-        right_button.setText("jButton1");
+        left_button.setText("jButton2");
+        left_button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                left_buttonActionPerformed(evt);
+            }
+        });
 
-        left_button.setText("jButton1");
+        right_button.setText("jButton3");
+        right_button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                right_buttonActionPerformed(evt);
+            }
+        });
 
-        down_button.setText("jButton1");
+        down_button.setText("jButton4");
+        down_button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                down_buttonActionPerformed(evt);
+            }
+        });
 
-        title.setText("jLabel1");
+        titutlo.setText("jLabel1");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addGap(44, 44, 44)
+                .addComponent(left_button)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 100, Short.MAX_VALUE)
+                .addComponent(right_button)
+                .addGap(82, 82, 82))
+            .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(left_button)
-                        .addGap(44, 44, 44)
-                        .addComponent(right_button))
+                        .addGap(142, 142, 142)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(down_button)
+                            .addComponent(up_button)))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(68, 68, 68)
-                        .addComponent(up_button))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(67, 67, 67)
-                        .addComponent(down_button)))
-                .addContainerGap(182, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(title)
-                .addGap(21, 21, 21))
+                        .addGap(34, 34, 34)
+                        .addComponent(titutlo)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(17, 17, 17)
-                .addComponent(title)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 155, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(28, 28, 28)
+                .addComponent(titutlo)
+                .addGap(18, 18, 18)
                 .addComponent(up_button)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(27, 27, 27)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(right_button)
-                    .addComponent(left_button))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addComponent(left_button)
+                    .addComponent(right_button))
+                .addGap(18, 18, 18)
                 .addComponent(down_button)
-                .addGap(14, 14, 14))
+                .addContainerGap(107, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void up_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_up_buttonActionPerformed
 
+        this.direction = Directions.UP;
+        dispose();
+
+    }//GEN-LAST:event_up_buttonActionPerformed
+
+    private void left_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_left_buttonActionPerformed
+        this.direction = Directions.LEFT;
+        dispose();
+    }//GEN-LAST:event_left_buttonActionPerformed
+
+    private void right_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_right_buttonActionPerformed
+        this.direction = Directions.RIGHT;
+        dispose();
+    }//GEN-LAST:event_right_buttonActionPerformed
+
+    private void down_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_down_buttonActionPerformed
+        this.direction = Directions.DOWN;
+        dispose();    }//GEN-LAST:event_down_buttonActionPerformed
+
+    // no main
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton down_button;
     private javax.swing.JButton left_button;
     private javax.swing.JButton right_button;
-    private javax.swing.JLabel title;
+    private javax.swing.JLabel titutlo;
     private javax.swing.JButton up_button;
     // End of variables declaration//GEN-END:variables
 }

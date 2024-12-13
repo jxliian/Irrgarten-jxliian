@@ -6,7 +6,7 @@ package irrgartenjaava.controller;
 
 import irrgartenjaava.Directions;
 import irrgartenjaava.Game;
-import irrgartenjaava.UI.TextUI;
+import irrgartenjaava.UI.*; // para añadir todos
 
 
 /**
@@ -16,9 +16,9 @@ import irrgartenjaava.UI.TextUI;
 public class Controller {
     
     private Game game;
-    private TextUI view;
+    private UI view;
     
-    public Controller(Game game, TextUI view) {
+    public Controller(Game game, UI view) {
         this.game = game;
         this.view = view;
     }
