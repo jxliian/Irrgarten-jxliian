@@ -1,5 +1,7 @@
 # Irrgarten
 
+<img src="https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.freepik.es%2Ffotos%2Fjuego-laberinto%2F9&psig=AOvVaw1oSWLEL7MWgHPGDLstRBs4&ust=1735384992001000&source=images&cd=vfe&opi=89978449&ved=0CBQQjRxqFwoTCPCxyoLrx4oDFQAAAAAdAAAAABB6" >
+
 ### Autor:
 - **Usuario GitHub**: jxliian 
 - **Nombre**: Julian Carrion Tovar
