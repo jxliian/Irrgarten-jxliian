@@ -1,7 +1,7 @@
 # Irrgarten
 
 <p align="center">
-  <img src="https://projects-static.raspberrypi.org/projects/rpg/068764654312aecc1f50b8e9296fdaeb33d0f45f/es-ES/images/rpg.png" >
+  <img src="https://m.media-amazon.com/images/I/81dZdBKtnxL._AC_SL1500_.jpg" >
 </p>
 
 ### Autor:
