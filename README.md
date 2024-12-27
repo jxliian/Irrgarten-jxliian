@@ -1,6 +1,8 @@
 # Irrgarten
 
-<img src="https://projects-static.raspberrypi.org/projects/rpg/068764654312aecc1f50b8e9296fdaeb33d0f45f/es-ES/images/rpg.png" >
+<p align="center">
+  <img src="https://projects-static.raspberrypi.org/projects/rpg/068764654312aecc1f50b8e9296fdaeb33d0f45f/es-ES/images/rpg.png" >
+</p>
 
 ### Autor:
 - **Usuario GitHub**: jxliian 
